@@ -1,7 +1,9 @@
 # API BlockDomi Client
 
 # DNS PRIMARIO (MASTER)
+```plaintext
 nano /etc/bind/named.conf.local
+```
 Caso não utilize DNS SLAVES (SECUNDARIO), retire a parte allow-transfer e also-notify, caso utilize substitua os ips 10.0.0.1 pelo ip do DNS SLAVES (SECUNDARIO)
 
 ```plaintext
