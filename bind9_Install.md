@@ -83,6 +83,11 @@ options {
     //    responses-per-second 15;
     //    window 5;
     //};
+
+    // Se usar bloqueios de dominios crie o rpz e descomente as linhas seguintes:
+    //response-policy {
+    //zone "rpz.zone" policy CNAME localhost;
+    //};
  
     // Melhora o desempenho do servidor, reduzindo os volumes de dados de saída.
     // O padrão BIND é (no) não.
@@ -126,9 +131,6 @@ options {
     version "RR DNS Server";
 };
 ```
-# Caso utilize a API BLOCKDOMI para bloqueio de dominios
-Adicione  
-
 Legal agora o servidor Recursivo já está funcionando e limitando os IPs que poderão realizar consultas ao mesmo.
 Caso você não queria seu servidor sendo recursivo altere na ACL autorizados deixando apenas 127.0.0.1 e ::1.
 Se seu servidor não tiver IPv6? (Que triste rsrsrs) Recomendo que desative o ipv6 no bind.
@@ -174,3 +176,8 @@ systemctl restart bind9
 ```plaintext
 systemctl status bind9
 ```
+Se tudo ocorrer como esperado seu DNS Recusivo esta finalizado e funcionando
+
+# CREDITOS 
+Rudimar Remontti
+https://blog.remontti.com.br/5958
