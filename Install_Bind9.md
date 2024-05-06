@@ -8,8 +8,8 @@ Caso não utilize DNS SLAVES (SECUNDARIO), retire a parte allow-transfer e also-
 zone "rpz.zone" {
     type slave;
     file "/var/cache/bind/rpz/db.rpz.zone.hosts";
-    masters { 10.51.51.2; };
-    allow-notify { 10.51.51.2; };
+    masters { 10.0.0.1; };
+    allow-notify { 10.0.0.1; };
 };
 ```
 
