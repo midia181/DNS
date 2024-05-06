@@ -1,5 +1,4 @@
-# BlockDomi Client
-Cliente install para blockdomi 
+# API BlockDomi Client
 
 # DNS PRIMARIO (MASTER)
 nano /etc/bind/named.conf.local
