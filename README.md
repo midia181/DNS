@@ -67,7 +67,7 @@ options {
 # Crie um diretório onde irá ficar o script do BLOCKDOMI:
 mkdir /etc/bind/scripts
 cd /etc/bind/scripts
-wget 
+wget https://raw.githubusercontent.com/midia181/blockinstall/main/blockdomi_bind9.py
 # Como o script usa o python 3 precisaremos instalar os pacotes nescessários para executa-lo.
 apt install python3 python3-requests tree
 # Execulte o script para sicronizar com a API do BLOCKDOMI:
