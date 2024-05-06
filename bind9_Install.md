@@ -1,4 +1,4 @@
-# INSTALAR DNS (BIND9)
+# INSTALANDO DNS (BIND9)
 
 ```plaintext
 
