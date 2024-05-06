@@ -3,7 +3,7 @@
 Obtenha acesso a API;
 https://wa.me/5584998667245?text=Como+obter+acesso+a+API%3F
 # DNS PRIMARIO (MASTER)
-Agora crie uma zona chamada rpz.zone em seu /etc/bind/named.conf.local.
+Crie uma zona chamada rpz.zone em seu /etc/bind/named.conf.local.
 ```plaintext
 nano /etc/bind/named.conf.local
 ```
