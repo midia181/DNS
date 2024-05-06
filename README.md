@@ -16,7 +16,9 @@ also-notify { 10.0.0.1; };
 ```
 
 # Crie o diretório “rpz” e os arquivos de hosts que serão bloqueados.
+```plaintext
 mkdir /var/cache/bind/rpz/
+```
 # Crie um atalho em /etc/bind para facilitar o acesso a pasta rpz
 ln -s /var/cache/bind/rpz/ /etc/bind/rpz
 # Na pasta /var/cache/bind/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
