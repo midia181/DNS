@@ -108,7 +108,7 @@ Verifique os dominios bloqueados:
 ```plaintext
 cat /etc/bind/rpz/domain_all
 ```
-Apos rodar o script poderá testar os dominios bloqueados:
+Apos rodar o script poderá testar os dominios bloqueados, substitua o dominiobloqueado.com pelo dominio que deseja testar o bloqueio:
 ```plaintext
 dig dominiobloqueado.com @localhost
 ```
