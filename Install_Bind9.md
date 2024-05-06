@@ -132,5 +132,5 @@ localhost. 10800	IN A	x.x.x.x
 ;; Query time: 479 msec
 ;; SERVER: ::1#53(::1)
 ;; WHEN: seg jan 22 11:35:55 -03 2024
-;; MSG SIZ
+;; MSG SIZE  rcvd: 137
 ```
