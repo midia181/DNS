@@ -3,11 +3,11 @@
 Obtenha acesso a API;
 https://wa.me/5584998667245?text=Como+obter+acesso+a+API%3F
 # DNS PRIMARIO (MASTER)
+Agora crie uma zona chamada rpz.zone em seu /etc/bind/named.conf.local.
 ```plaintext
 nano /etc/bind/named.conf.local
 ```
 Caso não utilize DNS SLAVES (SECUNDARIO), retire a parte allow-transfer e also-notify, caso utilize substitua os ips 10.0.0.1 pelo ip do DNS SLAVES (SECUNDARIO)
-
 ```plaintext
 zone "rpz.zone" {
     type slave;
@@ -16,7 +16,6 @@ zone "rpz.zone" {
     allow-notify { 10.0.0.1; };
 };
 ```
-
 Crie o diretório “rpz” e os arquivos de hosts que serão bloqueados.
 ```plaintext
 mkdir /var/cache/bind/rpz/
@@ -38,7 +37,6 @@ $TTL 1H
         NS  bloqueiosana.provedor.com.
 ;       ou
 ;       NS  localhost.
- 
 sitequeprecisabloquear.com     IN CNAME .
 *.sitequeprecisabloquear.com   IN CNAME .
 elesmandamnosfaz.bo.bo         IN CNAME .
@@ -50,7 +48,6 @@ sitequeprecisabloquear.com        IN CNAME .
 *.sitequeprecisabloquear.com      IN CNAME .
 ```
 Assim qualquer subdomínio (*).domino.com seja traduzido sempre irá ser apontado para seu IP ou localhost.
-
 Antes de criar o script, ajuste o response-policy dentro do seu /etc/bind/named.conf.options
 ```plaintext
 options {
