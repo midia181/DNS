@@ -88,11 +88,12 @@ Seu diretório terá os seguintes arquivos
 tree -h /var/cache/bind/rpz/
 ```
 ```plaintext
-[4.0K]  /var/cache/bind/rpz/
-├── [299K]  db.rpz.zone.hosts
-├── [ 86K]  domain_all
-├── [  20]  rpz -> /var/cache/bind/rpz/
-└── [  10]  version
+/var/cache/bind/rpz/
+|-- [299K]  db.rpz.zone.hosts
+|-- [ 86K]  domain_all
+`-- [  10]  version
+
+0 directories, 3 files
 ```
 Se você executar o script novamente nada irá acontecer até que uma nova versão seja lancada.
 Para que tenhamos nossa lista sempre atualizada, colocamos o script para ser executado todos os dias a meia noite.
