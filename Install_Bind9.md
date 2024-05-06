@@ -89,18 +89,22 @@ Caso venha utilizar localhost:
 python3 /etc/bind/scripts/blockdomi_bind9.py localhost
 ```
 Ao rodar o script se tudo ocorrer bem a menssagem irá aparecer:
+```plaintext
 Arquivo de zona RPZ atualizado.
 Permissões do diretório alteradas com sucesso.
 Serviço Bind9 reiniciado com sucesso.
 Seu diretório terá os seguintes arquivos
+```
 ```plaintext
 tree -h /var/cache/bind/rpz/
 ```
+```plaintext
 [4.0K]  /var/cache/bind/rpz/
 ├── [299K]  db.rpz.zone.hosts
 ├── [ 86K]  domain_all
 ├── [  20]  rpz -> /var/cache/bind/rpz/
 └── [  10]  version
+```
 Se você executar o script novamente nada irá acontecer até que uma nova versão seja lancada.
 Para que tenhamos nossa lista sempre atualizada, colocamos o script para ser executado todos os dias a meia noite. Caso utilize localhost mudar o dominio para localhost
 ```plaintext
