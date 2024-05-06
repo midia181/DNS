@@ -82,9 +82,8 @@ Ao rodar o script se tudo ocorrer bem a menssagem irá aparecer:
 Arquivo de zona RPZ atualizado.
 Permissões do diretório alteradas com sucesso.
 Serviço Bind9 reiniciado com sucesso.
-Seu diretório terá os seguintes arquivos
 ```
-Seu diretório terá os seguintes arquivos:
+Seu diretório terá os seguintes arquivos
 ```plaintext
 tree -h /var/cache/bind/rpz/
 ```
