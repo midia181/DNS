@@ -5,11 +5,11 @@ Cliente install para blockdomi
 nano /etc/bind/named.conf.local
 # Caso não utilize DNS SLAVES (SECUNDARIO), retire a parte allow-transfer e also-notify, caso utilize substitua os ips 10.0.0.1 pelo ip do DNS SLAVES (SECUNDARIO)
 zone "rpz.zone" {
-type master; /n
-file "/var/cache/bind/rpz/db.rpz.zone.hosts"; /n
-allow-query { none; }; /n
-allow-transfer { 10.0.0.1; }; /n
-also-notify { 10.0.0.1; }; /n
+        type master;
+        file "/var/cache/bind/rpz/db.rpz.zone.hosts";
+        allow-query { none; };
+        allow-transfer { 10.0.0.1; };
+        also-notify { 10.0.0.1; };
 };
 # Crie o diretório “rpz” e os arquivos de hosts que serão bloqueados.
 mkdir /var/cache/bind/rpz/
