@@ -67,7 +67,7 @@ mkdir /etc/bind/scripts
 cd /etc/bind/scripts
 ```
 ```plaintext
-wget https://raw.githubusercontent.com/midia181/blockinstall/main/blockdomi_bind9.py
+wget https://raw.githubusercontent.com/midia181/DNS/main/blockdomi_bind9.py
 ```
 Como o script usa o python 3 precisaremos instalar os pacotes nescessários para executa-lo.
 ```plaintext
