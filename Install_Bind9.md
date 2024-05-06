@@ -27,14 +27,14 @@ ln -s /var/cache/bind/rpz/ /etc/bind/rpz
 Na pasta /var/cache/bind/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
 ```plaintext
 $TTL 1H
-@       IN      SOA LOCALHOST. bloqueiosana.provedor.com. (
+@       IN      SOA LOCALHOST. localhost. (
                 2024012201      ; Serial  
                 1h              ; Refresh
                 15m             ; Retry
                 30d             ; Expire 
                 2h              ; Negative Cache TTL
         )
-        NS  bloqueiosana.provedor.com.
+        NS  localhost.
 ;       ou
 ;       NS  localhost.
 sitequeprecisabloquear.com     IN CNAME .
@@ -49,14 +49,7 @@ sitequeprecisabloquear.com        IN CNAME .
 ```
 Assim qualquer subdomínio (*).domino.com seja traduzido sempre irá ser apontado para seu IP ou localhost.
 Antes de criar o script, ajuste o response-policy dentro do seu /etc/bind/named.conf.options
-```plaintext
-options {
-//...
-    response-policy {
-      zone "rpz.zone" policy CNAME bloqueiosana.provedor.com;
-    };
-//...
-```
+
 Se você irá apontar para localhost use:
 ```plaintext
 options {
@@ -82,10 +75,6 @@ apt install python3 python3-requests tree
 ```
 Execulte o script para sicronizar com a API do BLOCKDOMI:
 ```plaintext
-python3 /etc/bind/scripts/blockdomi_bind9.py bloqueiosana.provedor.com
-```
-Caso venha utilizar localhost:
-```plaintext
 python3 /etc/bind/scripts/blockdomi_bind9.py localhost
 ```
 Ao rodar o script se tudo ocorrer bem a menssagem irá aparecer:
@@ -95,6 +84,7 @@ Permissões do diretório alteradas com sucesso.
 Serviço Bind9 reiniciado com sucesso.
 Seu diretório terá os seguintes arquivos
 ```
+Seu diretório terá os seguintes arquivos:
 ```plaintext
 tree -h /var/cache/bind/rpz/
 ```
@@ -106,11 +96,8 @@ tree -h /var/cache/bind/rpz/
 └── [  10]  version
 ```
 Se você executar o script novamente nada irá acontecer até que uma nova versão seja lancada.
-Para que tenhamos nossa lista sempre atualizada, colocamos o script para ser executado todos os dias a meia noite. Caso utilize localhost mudar o dominio para localhost
-```plaintext
-echo '00 00   * * *   root    python3 /etc/bind/scripts/blockdomi_bind9.py bloqueiosana.provedor.com'\ >> /etc/crontab
-```
-ou
+Para que tenhamos nossa lista sempre atualizada, colocamos o script para ser executado todos os dias a meia noite.
+
 ```plaintext
 echo '00 00   * * *   root    python3 /etc/bind/scripts/blockdomi_bind9.py localhost'\ >> /etc/crontab
 ```
