@@ -1,5 +1,7 @@
+# Bloquear sites pelo DNS (BIND9) Response Policy Zones
 # API BlockDomi Client BIND9
-
+Obtenha acesso a API;
+(https://wa.me/5584998667245?text=Como+obter+acesso+a+API%3F)
 # DNS PRIMARIO (MASTER)
 ```plaintext
 nano /etc/bind/named.conf.local
