@@ -112,3 +112,25 @@ Apos rodar o script poderá testar os dominios bloqueados:
 ```plaintext
 dig dominiobloqueado.com @localhost
 ```
+```plaintext
+; <<>> DiG 9.11.5-P4-5.1+deb10u9-Debian <<>> dominiobloqueado.com @localhost
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 42124
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+ 
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+; COOKIE: be484fb71dfe219dd9e6544465ae7d4b7e142ef750ed0d80 (good)
+;; QUESTION SECTION:
+;dominiobloqueado.com.		IN	A
+ 
+;; ANSWER SECTION:
+dominiobloqueado.com.	5	IN	CNAME	localhost.
+localhost. 10800	IN A	x.x.x.x
+ 
+;; Query time: 479 msec
+;; SERVER: ::1#53(::1)
+;; WHEN: seg jan 22 11:35:55 -03 2024
+;; MSG SIZ
+```
