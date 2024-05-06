@@ -134,15 +134,7 @@ options {
 Legal agora o servidor Recursivo já está funcionando e limitando os IPs que poderão realizar consultas ao mesmo.
 Caso você não queria seu servidor sendo recursivo altere na ACL autorizados deixando apenas 127.0.0.1 e ::1.
 Se seu servidor não tiver IPv6? (Que triste rsrsrs) Recomendo que desative o ipv6 no bind.
-```plaintext
-nano /etc/default/named 
-```
-Adicione um -4 em OPTIONS.
-```plaintext
-OPTIONS="-u bind"
-#para
-OPTIONS="-4 -u bind"
-```
+
 Altere listen-on-v6 para none.
 ```plaintext
 nano /etc/bind/named.conf.options
