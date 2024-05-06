@@ -1,4 +1,4 @@
-# blockinstall
+# BlockDomi Client
 Cliente install para blockdomi 
 
 # DNS PRIMARIO (MASTER)
