@@ -104,7 +104,11 @@ Depois reinicie o cron
 ```plaintext
 systemctl restart cron
 ```
+Verifique os dominios bloqueados:
+```plaintext
+cat /etc/bind/rpz/domain_all
+```
 Apos rodar o script poderá testar os dominios bloqueados:
 ```plaintext
-dig 2filmestorrent.top @localhost
+dig dominiobloqueado.com @localhost
 ```
