@@ -35,8 +35,8 @@ sitequeprecisabloquear.com IN CNAME .
 ```
 A cada dominio bloqueado irá conter:
 ```plaintext
-sitequeprecisabloquear.com        IN CNAME .
-*.sitequeprecisabloquear.com      IN CNAME .
+sitequeprecisabloquear.com IN CNAME .
+*.sitequeprecisabloquear.com IN CNAME .
 ```
 Adicione a RPZ no final do arquivo /etc/unbound/unbound.conf
 ```plaintext
