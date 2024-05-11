@@ -14,20 +14,20 @@ Crie um arquivo de zona vazio.
 ```plaintext
 touch /var/cache/unbound/rpz/db.rpz.zone.hosts
 ```
-Crie um atalho do arquivo db.rpz.block.zone.hosts em /etc/unbound/ .
+Crie um atalho do arquivo db.rpz.block.zone.hosts em /etc/unbound .
 ```plaintext
 ln -s /var/cache/unbound/rpz/db.rpz.block.zone.hosts /etc/unbound/db.rpz.block.zone.hosts
 ```
 Adicione a RPZ no arquivo de /etc/unbound/unbound.conf
 ```plaintext
-/etc/unbound/unbound.conf
+nano /etc/unbound/unbound.conf
 ```
 ```plaintext
 rpz:
-    name: teste.blockdomi.com.br
+    name: blockdomi.com.br
     zonefile: /etc/unbound/db.rpz.block.zone.hosts
     rpz-action-override: cname
-    rpz-cname-override: "teste.blockdomi.com.br."
+    rpz-cname-override: "blockdomi.com.br."
 ```
 Crie o diretório “rpz” e os arquivos de hosts que serão bloqueados.
 ```plaintext
