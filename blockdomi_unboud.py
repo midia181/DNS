@@ -93,8 +93,8 @@ def main(var_domain):
     """
     Executa o script principal: atualiza o arquivo de versão, baixa a lista de domínios e atualiza a zona RPZ se necessário.
     """
-    version_url = 'https://api.anablock.net.br/api/version'
-    domain_list_url = 'https://api.anablock.net.br/api/domain/all'
+    version_url = 'https://api.blockdomi.com.br/domain/version'
+    domain_list_url = 'https://api.blockdomi.com.br/domain/all'
     version_file_path = '/var/cache/unbound/rpz/version'
     domain_list_path = '/var/cache/unbound/rpz/domain_all'
     rpz_zone_file = '/var/cache/unbound/rpz/db.rpz.block.zone.hosts'
@@ -108,8 +108,6 @@ def main(var_domain):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Uso: python3/etc/unbound/anablock_unbound.py sub.dominio.com.br")
+        print("Uso: python3/etc/unbound/blockdomi_unbound.py sub.dominio.com.br")
         sys.exit(1)
     main(sys.argv[1])
-
-################################################################################
