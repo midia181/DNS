@@ -65,7 +65,7 @@ apt install python3 python3-requests tree
 ```
 Execulte o script para sicronizar com a API do BLOCKDOMI:
 ```plaintext
-python3 /etc/bind/scripts/blockdomi_bind9.py bloqueados.blockdomi.com.br
+python3 /etc/unbound/scripts/blockdomi_unbound.py bloqueados.blockdomi.com.br
 ```
 Ao rodar o script se tudo ocorrer bem a menssagem irá aparecer:
 ```plaintext
