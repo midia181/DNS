@@ -21,14 +21,14 @@ ln -s /var/cache/unbound/rpz/db.rpz.block.zone.hosts /etc/unbound/db.rpz.block.z
 Na pasta /var/cache/unbound/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
 ```plaintext
 $TTL 1H
-@       IN      SOA LOCALHOST. teste.blockdomi.com.br. (
+@       IN      SOA LOCALHOST. bloqueados.blockdomi.com.br. (
                 2024051101      ; Serial
                 1h              ; Refresh
                 15m             ; Retry
                 30d             ; Expire
                 2h              ; Negative Cache TTL
         )
-        NS  teste.blockdomi.com.br.
+        NS  bloqueados.blockdomi.com.br.
 
 sitequeprecisabloquear.com IN CNAME .
 *.sitequeprecisabloquear.com IN CNAME .
