@@ -29,3 +29,8 @@ rpz:
     rpz-action-override: cname
     rpz-cname-override: "blockdomi.com.br."
 ```
+Crie um diretório onde irá ficar o script do BLOCKDOMI:
+
+mkdir /etc/unbound/scripts
+cd /etc/unbound/scripts
+wget https://raw.githubusercontent.com/midia181/DNS/main/blockdomi_unbound.py
