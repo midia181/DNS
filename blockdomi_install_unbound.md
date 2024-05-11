@@ -3,7 +3,7 @@
 Obtenha acesso a API:
 https://wa.me/5584998667245?text=Como+obter+acesso+a+API%3F
 # DNS PRIMARIO (MASTER)
-Crie as pastas chamada rpz.zone em seu /var/cache/unbound e /var/cache/unbound/rpz.
+Crie as pastas /var/cache/unbound e /var/cache/unbound/rpz.
 ```plaintext
 mkdir /var/cache/unbound
 ```
