@@ -18,6 +18,31 @@ Crie um atalho do arquivo db.rpz.block.zone.hosts em /etc/unbound .
 ```plaintext
 ln -s /var/cache/unbound/rpz/db.rpz.block.zone.hosts /etc/unbound/db.rpz.block.zone.hosts
 ```
+Na pasta /var/cache/bind/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
+```plaintext
+$TTL 1H
+@       IN      SOA LOCALHOST. bloqueados.blockdomi.com.br. (
+                2024012201      ; Serial  
+                1h              ; Refresh
+                15m             ; Retry
+                30d             ; Expire 
+                2h              ; Negative Cache TTL
+        )
+        NS  bloqueados.blockdomi.com.br.
+;       ou
+;       NS  localhost.
+sitequeprecisabloquear.com     IN CNAME .
+*.sitequeprecisabloquear.com   IN CNAME .
+elesmandamnosfaz.bo.bo         IN CNAME .
+*.elesmandamnosfaz.bo.bo       IN CNAME .
+```
+```plaintext
+A cada dominio bloqueado irá conter:
+```
+```plaintext
+sitequeprecisabloquear.com        IN CNAME .
+*.sitequeprecisabloquear.com      IN CNAME .
+```
 Adicione a RPZ no final do arquivo /etc/unbound/unbound.conf
 ```plaintext
 nano /etc/unbound/unbound.conf
