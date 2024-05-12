@@ -40,7 +40,8 @@ Arquivo de Config (Edite de acordo com suas configurações)
 
  
 server:
-    # Ativar o módulo respip
+
+    # Ative o módulo respip se usar a API da BLOCKDOMI
     module-config: "respip validator iterator"
  
 #usuario do daemon e permissoes ( chown unbound.unbound /etc/unbound -R )
