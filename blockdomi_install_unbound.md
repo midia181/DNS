@@ -96,7 +96,7 @@ systemctl restart cron
 ```
 Verifique os dominios bloqueados:
 ```plaintext
-cat /etc/unbound/rpz/domain_all
+cat /var/cache/unbound/rpz/domain_all
 ```
 Apos rodar o script poderá testar os dominios bloqueados, substitua o dominiobloqueado.com pelo dominio que deseja testar o bloqueio:
 ```plaintext
