@@ -142,6 +142,7 @@ auto-trust-anchor-file: "/etc/unbound/root.key"
 val-clean-additional: yes
 
 # Caso utilize API da BLOCKDOMI para bloquear dominios descomente o RPZ.
+# Faça logo os primeiros passos para integrar a api antes de descomentar.
 #rpz:
 #   name: teste.blockdomi.com.br
 #   zonefile: /etc/unbound/db.rpz.block.zone.hosts
