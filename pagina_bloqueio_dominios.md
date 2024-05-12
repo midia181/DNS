@@ -15,7 +15,7 @@ Entre na pasta /var/www/ baixe a pagina web e descompacte
 cd /var/www/
 ```
 ```plaintext
-wget https://github.com/midia181/DNS/raw/main/bloqueadonobrasil.tar.gz
+wget https://github.com/midia181/Client_blockdomi/raw/main/bloqueadonobrasil.tar.gz
 ```
 ```plaintext
 tar -vxzf bloqueadonobrasil.tar.gz
