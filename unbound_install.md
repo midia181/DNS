@@ -172,3 +172,24 @@ Verifique se esta resolvendo nomes
 ```plaintext
 dig google.com @127.0.0.1
 ```
+irá aparecer como o exemplo:
+```plaintext
+; <<>> DiG 9.16.48-Debian <<>> google.com @127.0.0.1
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 19923
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;google.com.                    IN      A
+
+;; ANSWER SECTION:
+google.com.             3600    IN      A       142.250.78.206
+
+;; Query time: 976 msec
+;; SERVER: 127.0.0.1#53(127.0.0.1)
+;; WHEN: Sun May 12 16:26:34 UTC 2024
+;; MSG SIZE  rcvd: 55
+```
