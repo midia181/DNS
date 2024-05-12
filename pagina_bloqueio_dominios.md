@@ -10,14 +10,6 @@ Instale o certbot para gerar o certificado SSL para o dominio
 ```plaintext
 apt install certbot python3-certbot-apache php sudo
 ```
-Instale o certificado SSL para o dominio
-```plaintext
-certbot
-```
-Coloque no contrab para rodar as 2 da manhã para renovar o certificado altomaticamente
-```plaintext
-echo "0 2 * * * certbot renew --quiet" | sudo tee -a /etc/crontab > /dev/null
-```
 Entre na pasta /var/www/ baixe a pagina web e descompacte
 ```plaintext
 cd /var/www/
@@ -64,6 +56,14 @@ Adicione ao arquivo de configuração:
 Habilite a configuração e reinicie o Apache
 ```plaintext
 a2ensite bloqueadonobrasil.conf
+```
+Instale o certificado SSL para o dominio
+```plaintext
+certbot
+```
+Coloque no contrab para rodar as 2 da manhã para renovar o certificado altomaticamente
+```plaintext
+echo "0 2 * * * certbot renew --quiet" | sudo tee -a /etc/crontab > /dev/null
 ```
 ```plaintext
 systemctl restart apache2
