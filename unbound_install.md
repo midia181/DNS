@@ -73,7 +73,7 @@ port: 53
 do-ip4: yes
  
 # Caso utilize o IPv6 Habilite (yes) caso nao desative (no)
-do-ip6: no
+do-ip6: yes
  
 # Habilitar UDP
 do-udp: yes
