@@ -65,6 +65,11 @@ Coloque no contrab para rodar as 2 da manhã para renovar o certificado altomati
 ```plaintext
 echo "0 2 * * * certbot renew --quiet" | sudo tee -a /etc/crontab > /dev/null
 ```
+Reinicie o cron
+```plaintext
+service cron restart
+```
+Agora reinicie o apache2 para aplicar as configurações
 ```plaintext
 systemctl restart apache2
 ```
