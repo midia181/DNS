@@ -72,8 +72,8 @@ port: 53
 # Habilitar em IPv4
 do-ip4: yes
  
-# Habilitar em IPv6
-do-ip6: yes
+# Caso utilize o IPv6 Habilite (yes) caso nao desative (no)
+do-ip6: no
  
 # Habilitar UDP
 do-udp: yes
@@ -81,15 +81,13 @@ do-udp: yes
 # Habiitar TCP
 do-tcp: yes
  
-# Controle de Acesso ( Default Refused )
+# Controle de Acesso ( Default Refused ) Coloque sua Faixa
 access-control: 127.0.0.1 allow
 access-control: 10.0.0.0/8 allow
 access-control: 192.168.0.0/16 allow
 access-control: 100.64.0.0/10 allow
 access-control: 172.16.0.0/12 allow
-access-control: 45.224.181.0/24 allow
 access-control: ::1 allow
-access-control: 2804:b5c::/32 allow
  
 # Arquivo root.hints ( http://www.internic.net/domain/named.root )
 root-hints: "/etc/unbound/root.hints"
