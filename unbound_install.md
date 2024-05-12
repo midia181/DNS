@@ -148,10 +148,7 @@ val-clean-additional: yes
 #   rpz-action-override: cname
 #   rpz-cname-override: "teste.blockdomi.com.br."
 ```
-Se desejar remover os comentários do arquivo de configuração execute:
-```plaintext
-cat /etc/unbound/unbound.conf |grep -v "//" > /tmp/unbound.conf ; mv /tmp/unbound.conf /etc/unbound/
-```
+
 Verifique se tem erros on arquivo de configuração do unbound
 ```plaintext
 unbound-anchor -vvv
