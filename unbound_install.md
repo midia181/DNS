@@ -193,3 +193,4 @@ google.com.             3600    IN      A       142.250.78.206
 ;; WHEN: Sun May 12 16:26:34 UTC 2024
 ;; MSG SIZE  rcvd: 55
 ```
+Se tudo ocorrer como esperado seu DNS Recusivo esta finalizado e funcionando
