@@ -142,12 +142,12 @@ auto-trust-anchor-file: "/etc/unbound/root.key"
 val-clean-additional: yes
 
 # Caso utilize API da BLOCKDOMI para bloquear dominios descomente o RPZ.
-# Faça logo os primeiros passos para integrar a api antes de descomentar.
+# Faça primeiro os passos para integrar a API antes de descomentar.
 #rpz:
-#   name: teste.blockdomi.com.br
+#   name: bloqueados.blockdomi.com.br
 #   zonefile: /etc/unbound/db.rpz.block.zone.hosts
 #   rpz-action-override: cname
-#   rpz-cname-override: "teste.blockdomi.com.br."
+#   rpz-cname-override: "bloqueados.blockdomi.com.br."
 ```
 
 Verifique se tem erros on arquivo de configuração do unbound
