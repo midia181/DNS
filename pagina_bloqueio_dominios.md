@@ -8,9 +8,59 @@ apt upgrade
 ```
 Instale o certbot para gerar o certificado SSL para o dominio
 ```plaintext
-apt install certbot python3-certbot-apache
+apt install certbot python3-certbot-apache php
 ```
-Crie a pasta bloqueadosnobrasil em /var/www
+Instale o certificado SSL para o dominio
 ```plaintext
-mkdir /var/www/bloqueadonobrasil
+certbot
+```
+Entre na pasta /var/www/ baixe a pagina web e descompacte
+```plaintext
+cd /var/www/
+```
+```plaintext
+wget https://github.com/midia181/DNS/raw/main/bloqueadonobrasil.tar.gz
+```
+```plaintext
+tar -vxzf bloqueadonobrasil.tar.gz
+```
+```plaintext
+rm bloqueadonobrasil.tar.gz
+```
+Crie o arquivo de configuração da pagina web
+```plaintext
+nano /etc/apache2/sites-available/bloqueadonobrasil.conf
+```
+Adicione ao arquivo de configuração:
+```plaintext
+<virtualhost *:80>
+        Protocols h2 http/1.1
+        ServerName bloqueados.blockdomi.com.br
+        #ServerAlias x.xxx.xxx.x
+        #ServerAlias [xxxx:xxxx:xxxx:xxxx::x]
+ 
+        ServerAdmin seuemail@email.com
+ 
+        ErrorDocument 404 /index.php
+ 
+        DocumentRoot /var/www/bloqueadonobrasil
+ 
+        <Directory /var/www/bloqueadonobrasil/>
+            Options FollowSymLinks
+            AllowOverride All
+            # Restringe o acesso apenas para os IPs do seu ISP
+            #Require ip 127.0.0.1 ::1 100.64.0.0/10 x.xx.xxx.x/22 xxxx:xxxx::/32
+        </Directory>
+ 
+        LogLevel warn
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</virtualhost>
+```
+Habilite a configuração e reinicie o Apache
+```plaintext
+a2ensite bloqueadonobrasil.conf
+```
+```plaintext
+systemctl restart apache2
 ```
