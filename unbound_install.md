@@ -148,3 +148,27 @@ val-clean-additional: yes
 #   rpz-action-override: cname
 #   rpz-cname-override: "teste.blockdomi.com.br."
 ```
+Verifique se tem erros on arquivo de configuração do unbound
+```plaintext
+unbound-anchor -vvv
+```
+Dê permissões ao unbound
+```plaintext
+chmod 777 /etc/unbound -R
+```
+Iniciar o unbound
+```plaintext
+systemctl start unbound
+```
+Caso precise verificar algum erro veja o log do unbound
+```plaintext
+cat /etc/unbound/unbound.log
+```
+Verifique se o unbound esta funcionando
+```plaintext
+systemctl status unbound
+```
+Verifique se esta resolvendo nomes
+```plaintext
+dig google.com @127.0.0.1
+```
