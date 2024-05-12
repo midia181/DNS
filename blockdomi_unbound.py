@@ -71,13 +71,25 @@ def create_rpz_zone_file(domain_file, output_file, var_domain):
 
 def restart_unbound_service():
     """
-    Reinicia o serviço Unbound.
+    Reinicia o serviço Unbound somente se a configuração estiver correta.
     """
     try:
-        subprocess.run(['service', 'unbound', 'restart'], check=True)
-        print("Serviço Unbound reiniciado com sucesso.")
+        # Verifica se a configuração do Unbound tem erros de sintaxe
+        check_result = subprocess.run(['unbound-checkconf'], capture_output=True, text=True)
+        if check_result.returncode == 0:  # Sem erros de sintaxe
+            # Reinicia o serviço Unbound
+            restart_result = subprocess.run(['service', 'unbound', 'restart'], capture_output=True, text=True)
+            if restart_result.returncode == 0:
+                print("Serviço Unbound reiniciado com sucesso.")
+            else:
+                print("Erro ao reiniciar o serviço Unbound:")
+                print(restart_result.stderr)
+        else:
+            print("Erro na configuração do Unbound:")
+            print(check_result.stderr)
     except subprocess.CalledProcessError as e:
-        print(f"Falha ao reiniciar o serviço Unbound: {e}")
+        print(f"Erro ao verificar a configuração do Unbound: {e}")
+
 
 def change_permissions(directory):
     """
@@ -108,6 +120,6 @@ def main(var_domain):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Uso: python3/etc/unbound/blockdomi_unbound.py sub.dominio.com.br")
+        print("Uso: python3/etc/unbound/anablock_unbound.py sub.dominio.com.br")
         sys.exit(1)
     main(sys.argv[1])
