@@ -144,10 +144,10 @@ val-clean-additional: yes
 # Caso utilize API da BLOCKDOMI para bloquear dominios descomente o RPZ.
 # Faça primeiro os passos para integrar a API antes de descomentar.
 #rpz:
-#   name: bloqueados.blockdomi.com.br
+#   name: localhost
 #   zonefile: /etc/unbound/db.rpz.block.zone.hosts
 #   rpz-action-override: cname
-#   rpz-cname-override: "bloqueados.blockdomi.com.br."
+#   rpz-cname-override: "localhost."
 ```
 
 Verifique se tem erros on arquivo de configuração do unbound
