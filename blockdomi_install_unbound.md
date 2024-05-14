@@ -76,6 +76,7 @@ Adicione a RPZ no final do arquivo /etc/unbound/unbound.conf
 nano /etc/unbound/unbound.conf
 ```
 ```plaintext
+module-config: "respip validator iterator"
 rpz:
     name: localhost
     zonefile: /etc/unbound/rpz/db.rpz.block.zone.hosts
