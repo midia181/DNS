@@ -85,6 +85,7 @@ access-control: 192.168.0.0/16 allow
 access-control: 100.64.0.0/10 allow
 access-control: 172.16.0.0/12 allow
 access-control: ::1 allow
+#access-control: x.x.x.x/xx allow
  
 # Arquivo root.hints ( http://www.internic.net/domain/named.root )
 root-hints: "/etc/unbound/root.hints"
