@@ -9,7 +9,7 @@ nano /etc/bind/named.conf.local
 ```
 ```plaintext
 zone "rpz.zone" {
-    type slave;
+    type master;
     file "/var/cache/bind/rpz/db.rpz.zone.hosts";
     allow-query { none; };
 };
