@@ -64,12 +64,11 @@ tree -h /var/cache/unbound/rpz/
 ```
 ```plaintext
 /var/cache/unbound/rpz/
-|-- [299K]  db.rpz.block.zone.hosts
-|-- [   0]  db.rpz.zone.hosts
+|-- [301K]  db.rpz.block.zone.hosts
 |-- [ 86K]  domain_all
 `-- [  10]  version
 
-0 directories, 4 files
+0 directories, 3 files
 ```
 Se você executar o script novamente nada irá acontecer até que uma nova versão seja lancada. Para que tenhamos nossa lista sempre atualizada, colocamos o script para ser executado todos os dias a meia noite.
 ```plaintext
