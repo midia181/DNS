@@ -123,7 +123,7 @@ key-cache-slabs: 32
  
 # Limites de Memoria 
 # Primeiro parametro 10% ou 20% da memoria
-# Segundo parametro até 50% da memoria  
+# Segundo parametro ate 50% da memoria  
 
 rrset-cache-size: 1024m
 msg-cache-size: 4096m
