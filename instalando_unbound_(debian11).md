@@ -145,7 +145,7 @@ val-clean-additional: yes
 #module-config: "respip validator iterator"
 #rpz:
 #   name: localhost
-#   zonefile: /etc/unbound/db.rpz.block.zone.hosts
+#   zonefile: /etc/unbound/rpz/db.rpz.block.zone.hosts
 #   rpz-action-override: cname
 #   rpz-cname-override: "localhost."
 ```
