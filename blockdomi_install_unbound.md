@@ -41,7 +41,7 @@ Como o script usa o python 3 precisaremos instalar os pacotes nescessários para
 ```plaintext
 apt install python3 python3-requests tree
 ```
-Execulte o script para sicronizar com a API do BLOCKDOMI:
+Execulte o script para sicronizar com a API do BLOCKDOMI (Caso utilize dominio para pagina de bloqueio, substitua localhost por seu dominio):
 ```plaintext
 python3 /etc/unbound/scripts/blockdomi_unbound.py localhost
 ```
@@ -64,6 +64,7 @@ tree -h /etc/unbound/rpz/
 0 directories, 3 files
 ```
 Se você executar o script novamente nada irá acontecer até que uma nova versão seja lancada. Para que tenhamos nossa lista sempre atualizada, colocamos o script para ser executado todos os dias a meia noite.
+(Caso utilize dominio para pagina de bloqueio, substitua localhost por seu dominio):
 ```plaintext
 echo '00 00   * * *   root    python3 /etc/unbound/scripts/blockdomi_unbound.py localhost'\ >> /etc/crontab
 ```
