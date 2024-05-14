@@ -41,7 +41,7 @@ Arquivo de Config (Edite de acordo com suas configurações)
  
 server:
 
-    # Descomente o módulo respip se usar a API da BLOCKDOMI para bloqueio de dominios
+    # Descomente o modulo respip se usar a API da BLOCKDOMI para bloqueio de dominios
     #module-config: "respip validator iterator"
  
 #usuario do daemon e permissoes ( chown unbound.unbound /etc/unbound -R )
@@ -64,7 +64,7 @@ log-queries: no
 # log verbosity
 verbosity: 1
  
-# Endereço IP que vai "ouvir", default 127.0.0.1 e ::1
+# Endereco IP que vai "ouvir", default 127.0.0.1 e ::1
 interface: 0.0.0.0
 # Porta
 port: 53
@@ -98,7 +98,7 @@ hide-identity: no
 # Desabilitar version.server e version.bind queries.
 hide-version: yes
  
-# Segurança
+# Seguranca
 harden-glue: yes
 harden-dnssec-stripped: yes
  
@@ -109,19 +109,19 @@ use-caps-for-id: yes
 cache-min-ttl: 3600
 cache-max-ttl: 86400
  
-# Verificação de tempo em cache
+# Verificacao de tempo em cache
 prefetch: yes
  
-# Número de threads . 1 desabilita. Deixa sempre com o numero de core que tem o teu processador
+# Numero de threads . 1 desabilita. Deixa sempre com o numero de core que tem o teu processador
 num-threads: 4
  
-# Otimizações colocar 2 na 2 ou 2 na 3. Exemplo 2x2x2=8
+# Otimizacoes colocar 2 na 2 ou 2 na 3. Exemplo 2x2x2=8
 msg-cache-slabs: 32
 rrset-cache-slabs: 32
 infra-cache-slabs: 32
 key-cache-slabs: 32
  
-# Limites de Memória 
+# Limites de Memoria 
 # Primeiro parametro 10% ou 20% da memória
 # Segundo parametro até 50% da memória  
 
@@ -129,10 +129,10 @@ rrset-cache-size: 1024m
 msg-cache-size: 4096m
  
  
-# Log de inundação e ações de limpeza
+# Log de inundacao e acoes de limpeza
 unwanted-reply-threshold: 10000
  
-# Limitação de requests de localhost
+# Limitacao de requests de localhost
 do-not-query-localhost: no
  
 # Uso de dns root ( RFC5011 )
