@@ -50,6 +50,9 @@ sitequeprecisabloquear.com        IN CNAME .
 Assim qualquer subdomínio (*).domino.com seja traduzido sempre irá ser apontado para seu IP ou localhost.
 Antes de criar o script, ajuste o response-policy dentro do seu /etc/bind/named.conf.options
 ```plaintext
+nano /etc/bind/named.conf.options
+```
+```plaintext
 options {
 //...
     response-policy {
