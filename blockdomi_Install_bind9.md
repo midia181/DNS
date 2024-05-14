@@ -51,12 +51,9 @@ Antes de criar o script, ajuste o response-policy dentro do seu /etc/bind/named.
 nano /etc/bind/named.conf.options
 ```
 ```plaintext
-options {
-//...
     response-policy {
       zone "rpz.zone" policy CNAME localhost;
     };
-//...
 ```
 Crie um diretório onde irá ficar o script do BLOCKDOMI:
 ```plaintext
