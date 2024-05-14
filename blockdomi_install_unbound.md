@@ -21,14 +21,14 @@ ln -s /var/cache/unbound/rpz/db.rpz.block.zone.hosts /etc/unbound/db.rpz.block.z
 Na pasta /var/cache/unbound/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
 ```plaintext
 $TTL 1H
-@       IN      SOA LOCALHOST. bloqueados.blockdomi.com.br. (
+@       IN      SOA LOCALHOST. localhost. (
                 2024051101      ; Serial
                 1h              ; Refresh
                 15m             ; Retry
                 30d             ; Expire
                 2h              ; Negative Cache TTL
         )
-        NS  bloqueados.blockdomi.com.br.
+        NS  localhost.
 
 sitequeprecisabloquear.com IN CNAME .
 *.sitequeprecisabloquear.com IN CNAME .
@@ -44,10 +44,10 @@ nano /etc/unbound/unbound.conf
 ```
 ```plaintext
 rpz:
-    name: bloqueados.blockdomi.com.br
+    name: localhost
     zonefile: /etc/unbound/db.rpz.block.zone.hosts
     rpz-action-override: cname
-    rpz-cname-override: "bloqueados.blockdomi.com.br."
+    rpz-cname-override: "localhost."
 ```
 Crie um diretório onde irá ficar o script do BLOCKDOMI:
 ```plaintext
@@ -65,7 +65,7 @@ apt install python3 python3-requests tree
 ```
 Execulte o script para sicronizar com a API do BLOCKDOMI:
 ```plaintext
-python3 /etc/unbound/scripts/blockdomi_unbound.py bloqueados.blockdomi.com.br
+python3 /etc/unbound/scripts/blockdomi_unbound.py localhost
 ```
 Ao rodar o script se tudo ocorrer bem a menssagem irá aparecer:
 ```plaintext
@@ -88,7 +88,7 @@ tree -h /var/cache/unbound/rpz/
 ```
 Se você executar o script novamente nada irá acontecer até que uma nova versão seja lancada. Para que tenhamos nossa lista sempre atualizada, colocamos o script para ser executado todos os dias a meia noite.
 ```plaintext
-echo '00 00   * * *   root    python3 /etc/unbound/scripts/blockdomi_unbound.py bloqueados.blockdomi.com.br'\ >> /etc/crontab
+echo '00 00   * * *   root    python3 /etc/unbound/scripts/blockdomi_unbound.py localhost'\ >> /etc/crontab
 ```
 Depois reinicie o cron
 ```plaintext
