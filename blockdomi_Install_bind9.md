@@ -27,14 +27,14 @@ ln -s /var/cache/bind/rpz/ /etc/bind/rpz
 Na pasta /var/cache/bind/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
 ```plaintext
 $TTL 1H
-@       IN      SOA LOCALHOST. bloqueados.blockdomi.com.br. (
+@       IN      SOA LOCALHOST. localhost. (
                 2024012201      ; Serial  
                 1h              ; Refresh
                 15m             ; Retry
                 30d             ; Expire 
                 2h              ; Negative Cache TTL
         )
-        NS  bloqueados.blockdomi.com.br.
+        NS  localhost.
 ;       ou
 ;       NS  localhost.
 sitequeprecisabloquear.com     IN CNAME .
@@ -53,7 +53,7 @@ Antes de criar o script, ajuste o response-policy dentro do seu /etc/bind/named.
 options {
 //...
     response-policy {
-      zone "rpz.zone" policy CNAME bloqueados.blockdomi.com.br;
+      zone "rpz.zone" policy CNAME localhost;
     };
 //...
 ```
@@ -73,7 +73,7 @@ apt install python3 python3-requests tree
 ```
 Execulte o script para sicronizar com a API do BLOCKDOMI:
 ```plaintext
-python3 /etc/bind/scripts/blockdomi_bind9.py bloqueados.blockdomi.com.br
+python3 /etc/bind/scripts/blockdomi_bind9.py localhost
 ```
 Ao rodar o script se tudo ocorrer bem a menssagem irá aparecer:
 ```plaintext
@@ -97,7 +97,7 @@ Se você executar o script novamente nada irá acontecer até que uma nova vers�
 Para que tenhamos nossa lista sempre atualizada, colocamos o script para ser executado todos os dias a meia noite.
 
 ```plaintext
-echo '00 00   * * *   root    python3 /etc/bind/scripts/blockdomi_bind9.py bloqueados.blockdomi.com.br'\ >> /etc/crontab
+echo '00 00   * * *   root    python3 /etc/bind/scripts/blockdomi_bind9.py localhost'\ >> /etc/crontab
 ```
 Depois reinicie o cron
 ```plaintext
