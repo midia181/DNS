@@ -40,9 +40,6 @@ Arquivo de Config (Edite de acordo com suas configurações)
 
  
 server:
-
-    # Descomente o modulo respip se usar a API da BLOCKDOMI para bloqueio de dominios
-    #module-config: "respip validator iterator"
  
 #usuario do daemon e permissoes ( chown unbound.unbound /etc/unbound -R )
 directory: "/etc/unbound"
@@ -141,8 +138,10 @@ auto-trust-anchor-file: "/etc/unbound/root.key"
 # Seguranca extra dados cache
 val-clean-additional: yes
 
-# Caso utilize API da BLOCKDOMI para bloquear dominios descomente o RPZ.
+# Caso utilize API da BLOCKDOMI para bloquear dominios descomente o RPZ e o module-config.
 # Faca primeiro os passos para integrar a API antes de descomentar.
+
+#module-config: "respip validator iterator"
 #rpz:
 #   name: localhost
 #   zonefile: /etc/unbound/db.rpz.block.zone.hosts
