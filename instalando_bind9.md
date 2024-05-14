@@ -46,14 +46,12 @@ Explicação comentada no arquivo.
 nano /etc/bind/named.conf.options
 ```
 ```plaintext
-// ACL "autorizados" vão ficar os ips que são autorizados a fazer
+// ACL "autorizados" vao ficar os ips que sao autorizados a fazer
 // consultas recursivas neste servidor.
 // Neste caso vou incluir os ips que foram nos delegados bem como de localhost e IPs privados
 acl autorizados {
         127.0.0.1;
         ::1;
-        45.80.48.0/22;
-        2804:f123::/32;
         192.168.0.0/16;
         172.16.0.0/12;
         100.64.0.0/10;
@@ -61,8 +59,8 @@ acl autorizados {
 };
  
 options {
-    // O diretório de trabalho do servidor
-    // Quaisquer caminho não informado será tomado como  padrão este diretório
+    // O diretorio de trabalho do servidor
+    // Quaisquer caminho nao informado sera tomado como  padrao este diretorio
     directory "/var/cache/bind";
  
     //Suporte a DNSSEC
@@ -73,12 +71,12 @@ options {
     auth-nxdomain no;
  
     // Respondendo para IPv4 e IPv6
-    // Porta 53 estará aberta para ambos v4 e v6
+    // Porta 53 estara aberta para ambos v4 e v6
     listen-on { any; };
     listen-on-v6 { any; };
  
-    // Limitação da taxa de resposta no sistema de nomes de domínio (https://kb.isc.org/docs/aa-00994)
-    // Se você esta montando um servido apenas para autoritativo descomente as linhas a baixo.
+    // Limitacao da taxa de resposta no sistema de nomes de dominio (https://kb.isc.org/docs/aa-00994)
+    // Se voce esta montando um servidor apenas para autoritativo descomente as linhas a baixo.
     //rate-limit {
     //    responses-per-second 15;
     //    window 5;
@@ -90,27 +88,27 @@ options {
     //};
  
     // Melhora o desempenho do servidor, reduzindo os volumes de dados de saída.
-    // O padrão BIND é (no) não.
+    // O padrao BIND é (no) nao.
     minimal-responses yes;
  
-    // Especifica quais hosts estão autorizados a fazer consultas
-    // recursivas através deste servidor.
-    // Aqui que você vai informar os IPs da sua rede que você irá permitir consultar os DNS.
+    // Especifica quais hosts estao autorizados a fazer consultas
+    // recursivas atraves deste servidor.
+    // Aqui que voce vai informar os IPs da sua rede que voce ira permitir consultar os DNS.
     allow-recursion {
         autorizados;
     };
  
-    // Endereço estão autorizados a emitir consultas ao cache local,
-    // sem acesso ao cache local as consultas recursivas são inúteis.
+    // Endereco estao autorizados a emitir consultas ao cache local,
+    // sem acesso ao cache local as consultas recursivas sao inuteis.
     allow-query-cache {
         autorizados;
     };
  
-    // Especifica quais hosts estão autorizados a fazer perguntas DNS comuns.
+    // Especifica quais hosts estao autorizados a fazer perguntas DNS comuns.
     allow-query { any; };
  
-    // Especifica quais hosts estão autorizados a receber transferências de zona a partir do servidor.
-    // Seu servidor Secundário, no nosso ex vou deixar então o ips dos dois servidores v4 e v6.
+    // Especifica quais hosts estao autorizados a receber transferencias de zona a partir do servidor.
+    // Seu servidor Secundario, no nosso ex vou deixar entao o ips dos dois servidores v4 e v6.
     // Caso nao utilize servidor secundario altere para allow-transfer { any; }; e remova also-notify.
     allow-transfer {
         45.80.48.3;
@@ -121,13 +119,13 @@ options {
         2804:f123:bebe:cafe::3;
     };
  
-    // Esta opção faz com que o servidor slave ao fazer a transferência de zonas
-    // mastes deste servidor não compile o arquivo, assim no outro servidor o arquivo
-    // da zona terá um texto "puro"
+    // Esta opcao faz com que o servidor slave ao fazer a transferencia de zonas
+    // mastes deste servidor nao compile o arquivo, assim no outro servidor o arquivo
+    // da zona tera um texto "puro"
     masterfile-format text;
  
     // Para evitar que vase a versao do Bind, definimos um nome
-    // Reza a lenda que deixar RR DNS Server seu servidor nunca sofrerá ataques.
+    // Reza a lenda que deixar RR DNS Server seu servidor nunca sofrera ataques.
     version "RR DNS Server";
 };
 ```
