@@ -138,7 +138,7 @@ do-not-query-localhost: no
 # Uso de dns root ( RFC5011 )
 auto-trust-anchor-file: "/etc/unbound/root.key"
  
-# Segurança extra dados cache
+# Seguranca extra dados cache
 val-clean-additional: yes
 
 # Caso utilize API da BLOCKDOMI para bloquear dominios descomente o RPZ.
