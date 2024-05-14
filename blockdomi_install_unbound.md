@@ -7,7 +7,7 @@ Crie a pasta rpz dentro de /etc/unbound .
 ```plaintext
 mkdir /etc/unbound/rpz
 ```
-Na pasta /etc/unbound/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
+No arquivo /etc/unbound/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
 ```plaintext
 $TTL 1H
 @       IN      SOA LOCALHOST. localhost. (
