@@ -89,6 +89,10 @@ rpz:
     rpz-action-override: cname
     rpz-cname-override: "localhost."
 ```
+Feito isso reinicie o unbound para aplicar as configurações
+```plaintext
+systemctl restart unbound
+```
 Verifique os dominios bloqueados:
 ```plaintext
 cat /var/cache/unbound/rpz/domain_all
