@@ -34,17 +34,6 @@ A cada dominio bloqueado irá conter:
 sitequeprecisabloquear.com IN CNAME .
 *.sitequeprecisabloquear.com IN CNAME .
 ```
-Adicione a RPZ no final do arquivo /etc/unbound/unbound.conf
-```plaintext
-nano /etc/unbound/unbound.conf
-```
-```plaintext
-rpz:
-    name: localhost
-    zonefile: /etc/unbound/db.rpz.block.zone.hosts
-    rpz-action-override: cname
-    rpz-cname-override: "localhost."
-```
 Crie um diretório onde irá ficar o script do BLOCKDOMI:
 ```plaintext
 mkdir /etc/unbound/scripts
@@ -89,6 +78,17 @@ echo '00 00   * * *   root    python3 /etc/unbound/scripts/blockdomi_unbound.py 
 Depois reinicie o cron
 ```plaintext
 systemctl restart cron
+```
+Adicione a RPZ no final do arquivo /etc/unbound/unbound.conf
+```plaintext
+nano /etc/unbound/unbound.conf
+```
+```plaintext
+rpz:
+    name: localhost
+    zonefile: /etc/unbound/db.rpz.block.zone.hosts
+    rpz-action-override: cname
+    rpz-cname-override: "localhost."
 ```
 Verifique os dominios bloqueados:
 ```plaintext
