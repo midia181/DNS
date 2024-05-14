@@ -7,13 +7,11 @@ Crie uma zona chamada rpz.zone em seu /etc/bind/named.conf.local.
 ```plaintext
 nano /etc/bind/named.conf.local
 ```
-Caso não utilize DNS SLAVES (SECUNDARIO), retire a parte allow-transfer e also-notify, caso utilize substitua os ips 10.0.0.1 pelo ip do DNS SLAVES (SECUNDARIO)
 ```plaintext
 zone "rpz.zone" {
     type slave;
     file "/var/cache/bind/rpz/db.rpz.zone.hosts";
-    masters { 10.0.0.1; };
-    allow-notify { 10.0.0.1; };
+    allow-query { none; };
 };
 ```
 Crie o diretório “rpz” e os arquivos de hosts que serão bloqueados.
