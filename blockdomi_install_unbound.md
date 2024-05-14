@@ -10,10 +10,6 @@ mkdir /var/cache/unbound
 ```plaintext
 mkdir /var/cache/unbound/rpz
 ```
-Crie um arquivo de zona vazio.
-```plaintext
-touch /var/cache/unbound/rpz/db.rpz.zone.hosts
-```
 Crie um atalho do arquivo db.rpz.block.zone.hosts em /etc/unbound .
 ```plaintext
 ln -s /var/cache/unbound/rpz/db.rpz.block.zone.hosts /etc/unbound/db.rpz.block.zone.hosts
