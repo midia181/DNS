@@ -41,6 +41,10 @@ Como o script usa o python 3 precisaremos instalar os pacotes nescessários para
 ```plaintext
 apt install python3 python3-requests tree
 ```
+No debian 12 irá precisar instalar o pacote unbound-anchor (caso nao tenha instalado) o mesmo não vem instalado por padrao.
+```plaintext
+apt install unbound-anchor
+```
 Execulte o script para sicronizar com a API do BLOCKDOMI (Caso utilize dominio para pagina de bloqueio, substitua localhost por seu dominio):
 ```plaintext
 python3 /etc/unbound/scripts/blockdomi_unbound.py localhost
