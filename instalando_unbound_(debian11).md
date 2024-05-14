@@ -122,8 +122,8 @@ infra-cache-slabs: 32
 key-cache-slabs: 32
  
 # Limites de Memoria 
-# Primeiro parametro 10% ou 20% da memória
-# Segundo parametro até 50% da memória  
+# Primeiro parametro 10% ou 20% da memoria
+# Segundo parametro até 50% da memoria  
 
 rrset-cache-size: 1024m
 msg-cache-size: 4096m
@@ -142,7 +142,7 @@ auto-trust-anchor-file: "/etc/unbound/root.key"
 val-clean-additional: yes
 
 # Caso utilize API da BLOCKDOMI para bloquear dominios descomente o RPZ.
-# Faça primeiro os passos para integrar a API antes de descomentar.
+# Faca primeiro os passos para integrar a API antes de descomentar.
 #rpz:
 #   name: localhost
 #   zonefile: /etc/unbound/db.rpz.block.zone.hosts
