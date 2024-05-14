@@ -3,18 +3,11 @@
 Obtenha acesso a API:
 https://wa.me/5584998667245?text=Como+obter+acesso+a+API%3F
 # DNS PRIMARIO (MASTER)
-Crie as pastas /var/cache/unbound e /var/cache/unbound/rpz.
+Crie a pasta rpz dentro de /etc/unbound .
 ```plaintext
-mkdir /var/cache/unbound
+mkdir /etc/unbound/rpz
 ```
-```plaintext
-mkdir /var/cache/unbound/rpz
-```
-Crie um atalho do arquivo db.rpz.block.zone.hosts em /etc/unbound .
-```plaintext
-ln -s /var/cache/unbound/rpz/db.rpz.block.zone.hosts /etc/unbound/db.rpz.block.zone.hosts
-```
-Na pasta /var/cache/unbound/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
+Na pasta /etc/unbound/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
 ```plaintext
 $TTL 1H
 @       IN      SOA LOCALHOST. localhost. (
@@ -60,10 +53,10 @@ Serviço Bind9 reiniciado com sucesso.
 ```
 Seu diretório terá os seguintes arquivos
 ```plaintext
-tree -h /var/cache/unbound/rpz/
+tree -h /etc/unbound/rpz/
 ```
 ```plaintext
-/var/cache/unbound/rpz/
+/etc/unbound/rpz/
 |-- [301K]  db.rpz.block.zone.hosts
 |-- [ 86K]  domain_all
 `-- [  10]  version
@@ -85,7 +78,7 @@ nano /etc/unbound/unbound.conf
 ```plaintext
 rpz:
     name: localhost
-    zonefile: /etc/unbound/db.rpz.block.zone.hosts
+    zonefile: /etc/unbound/rpz/db.rpz.block.zone.hosts
     rpz-action-override: cname
     rpz-cname-override: "localhost."
 ```
@@ -95,7 +88,7 @@ systemctl restart unbound
 ```
 Verifique os dominios bloqueados:
 ```plaintext
-cat /var/cache/unbound/rpz/domain_all
+cat /etc/unbound/rpz/domain_all
 ```
 Apos rodar o script poderá testar os dominios bloqueados, substitua o dominiobloqueado.com pelo dominio que deseja testar o bloqueio:
 ```plaintext
