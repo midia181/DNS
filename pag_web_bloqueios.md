@@ -31,7 +31,7 @@ Adicione ao arquivo de configuração:
 ```plaintext
 <virtualhost *:80>
         Protocols h2 http/1.1
-        ServerName bloqueados.blockdomi.com.br
+        ServerName subdominio.com.br
         #ServerAlias x.xxx.xxx.x
         #ServerAlias [xxxx:xxxx:xxxx:xxxx::x]
  
