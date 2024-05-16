@@ -3,6 +3,10 @@ MASTER (NS1)
 ```plaintext
 apt install unbound wget
 ```
+No debian 12 precisará instalar o pacote unbound-anchor
+```plaintext
+apt install unbound-anchor
+```
 Limpar o arquivo de configuração do unbound
 ```plaintext
 >/etc/unbound/unbound.conf
