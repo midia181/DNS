@@ -76,7 +76,7 @@ Seu diretório terá os seguintes arquivos
 tree -h /var/cache/bind/rpz/
 ```
 ```plaintext
-/var/cache/bind/rpz/
+/etc/bind/rpz/
 |-- [299K]  db.rpz.zone.hosts
 |-- [ 86K]  domain_all
 `-- [  10]  version
