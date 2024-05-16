@@ -1,7 +1,7 @@
 # INSTALANDO DNS RECURSIVO (UNBOUND) DEBIAN11 BASICO
 MASTER (NS1)
 ```plaintext
-apt install unbound
+apt install unbound wget
 ```
 Limpar o arquivo de configuração do unbound
 ```plaintext
