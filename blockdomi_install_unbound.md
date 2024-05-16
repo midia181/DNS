@@ -27,9 +27,10 @@ python3 /etc/unbound/scripts/blockdomi_unbound.py localhost
 ```
 Ao rodar o script se tudo ocorrer bem a menssagem irá aparecer:
 ```plaintext
+Diretório /etc/unbound/rpz criado com sucesso.
 Arquivo de zona RPZ atualizado.
 Permissões do diretório alteradas com sucesso.
-Serviço Bind9 reiniciado com sucesso.
+Serviço Unbound reiniciado com sucesso.
 ```
 No arquivo /etc/unbound/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
 ```plaintext
@@ -56,14 +57,19 @@ Seu diretório terá os seguintes arquivos
 tree -h /etc/unbound/rpz/
 ```
 ```plaintext
-/etc/unbound/rpz/
-|-- [301K]  db.rpz.block.zone.hosts
-|-- [ 86K]  domain_all
-`-- [  10]  version
+[4.0K]  /etc/unbound/rpz/
+├── [301K]  db.rpz.block.zone.hosts
+├── [ 86K]  domain_all
+└── [  10]  version
 
-0 directories, 3 files
+1 directory, 3 files
 ```
-Se você executar o script novamente nada irá acontecer até que uma nova versão seja lancada. Para que tenhamos nossa lista sempre atualizada, colocamos o script para ser executado todos os dias a meia noite.
+Se você executar o script novamente irá aparecer a seguinte menssagem:
+```plaintext
+Diretório /etc/unbound/rpz já existe.
+Já está na versão mais atual.
+```
+Para que tenhamos nossa lista sempre atualizada, colocamos o script para ser executado todos os dias a meia noite.
 (Caso utilize dominio para pagina de bloqueio, substitua localhost por seu dominio):
 ```plaintext
 echo '00 00   * * *   root    python3 /etc/unbound/scripts/blockdomi_unbound.py localhost'\ >> /etc/crontab
