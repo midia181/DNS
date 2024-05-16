@@ -27,7 +27,7 @@ Gere a chave
 ```plaintext
 unbound-anchor -a /etc/unbound/root.key -v
 ```
-Desative o systemd-resolve
+Desative o systemd-resolve (pule caso use debian 12)
 ```plaintext
 systemctl disable systemd-resolved.service
 ```
