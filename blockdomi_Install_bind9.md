@@ -67,7 +67,7 @@ wget https://raw.githubusercontent.com/midia181/client_blockdomi/main/blockdomi_
 ```
 Como o script usa o python 3 precisaremos instalar os pacotes nescessários para executa-lo.
 ```plaintext
-apt install python3 python3-requests tree
+apt install python3 python3-requests tree python3-termcolor
 ```
 Execulte o script para sicronizar com a API do BLOCKDOMI:
 ```plaintext
