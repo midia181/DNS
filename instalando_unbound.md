@@ -1,7 +1,7 @@
 # INSTALANDO DNS RECURSIVO (UNBOUND) DEBIAN11 BASICO
 MASTER (NS1)
 ```plaintext
-apt install unbound wget
+apt install unbound wget dnsutils
 ```
 No debian 12 precisará instalar o pacote unbound-anchor
 ```plaintext
