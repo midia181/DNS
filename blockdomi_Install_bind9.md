@@ -10,19 +10,11 @@ nano /etc/bind/named.conf.local
 ```plaintext
 zone "rpz.zone" {
     type master;
-    file "/var/cache/bind/rpz/db.rpz.zone.hosts";
+    file "/etc/bind/rpz/db.rpz.zone.hosts";
     allow-query { none; };
 };
 ```
-Crie o diretório “rpz” e os arquivos de hosts que serão bloqueados.
-```plaintext
-mkdir /var/cache/bind/rpz/
-```
-Crie um atalho em /etc/bind para facilitar o acesso a pasta rpz
-```plaintext
-ln -s /var/cache/bind/rpz/ /etc/bind/rpz
-```
-Na pasta /var/cache/bind/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
+Na pasta /etc/bind/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
 ```plaintext
 $TTL 1H
 @       IN      SOA LOCALHOST. localhost. (
