@@ -73,7 +73,7 @@ Serviço Bind9 reiniciado com sucesso.
 ```
 Seu diretório terá os seguintes arquivos
 ```plaintext
-tree -h /var/cache/bind/rpz/
+tree -h /etc/bind/rpz/
 ```
 ```plaintext
 /etc/bind/rpz/
