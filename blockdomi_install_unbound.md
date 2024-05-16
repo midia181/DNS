@@ -3,30 +3,6 @@
 Obtenha acesso a API:
 https://wa.me/5584998667245?text=Como+obter+acesso+a+API%3F
 # DNS PRIMARIO (MASTER)
-Crie a pasta rpz dentro de /etc/unbound .
-```plaintext
-mkdir /etc/unbound/rpz
-```
-No arquivo /etc/unbound/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
-```plaintext
-$TTL 1H
-@       IN      SOA LOCALHOST. localhost. (
-                2024051101      ; Serial
-                1h              ; Refresh
-                15m             ; Retry
-                30d             ; Expire
-                2h              ; Negative Cache TTL
-        )
-        NS  localhost.
-
-sitequeprecisabloquear.com IN CNAME .
-*.sitequeprecisabloquear.com IN CNAME .
-```
-A cada dominio bloqueado irá conter:
-```plaintext
-sitequeprecisabloquear.com IN CNAME .
-*.sitequeprecisabloquear.com IN CNAME .
-```
 Crie um diretório onde irá ficar o script do BLOCKDOMI:
 ```plaintext
 mkdir /etc/unbound/scripts
@@ -54,6 +30,26 @@ Ao rodar o script se tudo ocorrer bem a menssagem irá aparecer:
 Arquivo de zona RPZ atualizado.
 Permissões do diretório alteradas com sucesso.
 Serviço Bind9 reiniciado com sucesso.
+```
+No arquivo /etc/unbound/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
+```plaintext
+$TTL 1H
+@       IN      SOA LOCALHOST. localhost. (
+                2024051101      ; Serial
+                1h              ; Refresh
+                15m             ; Retry
+                30d             ; Expire
+                2h              ; Negative Cache TTL
+        )
+        NS  localhost.
+
+sitequeprecisabloquear.com IN CNAME .
+*.sitequeprecisabloquear.com IN CNAME .
+```
+A cada dominio bloqueado irá conter:
+```plaintext
+sitequeprecisabloquear.com IN CNAME .
+*.sitequeprecisabloquear.com IN CNAME .
 ```
 Seu diretório terá os seguintes arquivos
 ```plaintext
