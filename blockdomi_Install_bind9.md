@@ -1,8 +1,7 @@
-# Bloquear sites pelo DNS (BIND9) Response Policy Zones
-# API BlockDomi Client BIND9
-Obtenha acesso a API:
-https://wa.me/5584998667245?text=Como+obter+acesso+a+API%3F
-# DNS PRIMARIO (MASTER)
+# Implementar bloqueios de domínios
+A restrição de domínios no sistema de DNS deve ser configurada no servidor DNS recursivo utilizado pelos clientes do provedor de Internet.
+
+# Bloqueio de domínios no Bind9
 Crie uma zona chamada rpz.zone em seu /etc/bind/named.conf.local.
 ```plaintext
 nano /etc/bind/named.conf.local
