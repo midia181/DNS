@@ -1,3 +1,12 @@
+Bloqueios na Internet
+Confidencial: Em razão da natureza sensível da informação ou das circunstâncias de sua divulgação, os domínios/sites bloqueados são considerados confidenciais. Apenas empresas de telecomunicações registradas na Anatel têm permissão para acessar a API.
+
+Confira seu CNPJ aqui: ANATEL Outorga e Licenciamento
+
+Contatos para obter acesso à API:
+[WhatsApp](https://github.com)
+[Telegram](https://github.com)
+
 # Implementar bloqueios de domínios
 A restrição de domínios no sistema de DNS deve ser configurada no servidor DNS recursivo utilizado pelos clientes do provedor de Internet.
 
