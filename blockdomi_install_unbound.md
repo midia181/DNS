@@ -1,4 +1,4 @@
-Implementar bloqueios de domínios
+#Implementar bloqueios de domínios
 A restrição de domínios no sistema de DNS deve ser configurada no servidor DNS recursivo utilizado pelos clientes do provedor de Internet.
 Bloqueio de domínios no Unbound
 Crie um diretório onde irá ficar o script do BLOCKDOMI:
