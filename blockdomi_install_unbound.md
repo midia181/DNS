@@ -1,4 +1,4 @@
-#Bloquear sites pelo DNS (BIND9) Response Policy Zones
+# Bloquear sites pelo DNS (BIND9) Response Policy Zones
 Implementar bloqueios de domínios
 A restrição de domínios no sistema de DNS deve ser configurada no servidor DNS recursivo utilizado pelos clientes do provedor de Internet.
 Bloqueio de domínios no Unbound
