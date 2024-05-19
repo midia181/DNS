@@ -1,12 +1,12 @@
 ## Bloqueios na Internet
 
 > **Confidencial**: Em razão da natureza sensível da informação ou das circunstâncias de sua divulgação, os domínios/sites bloqueados são considerados confidenciais. Apenas empresas de telecomunicações registradas na Anatel têm permissão para acessar a API.
-
-Confira seu CNPJ aqui: [ANATEL Outorga e Licenciamento](https://informacoes.anatel.gov.br/paineis/outorga-e-licenciamento)
-
-Contatos para obter acesso à API:
-- [WhatsApp](https://api.whatsapp.com/send/?phone=5584998667245&text=Como+obter+acesso+a+API%3F&type=phone_number&app_absent=0)
-- [Telegram](https://t.me/LucasMidia)
+> 
+> Confira seu CNPJ aqui: [ANATEL Outorga e Licenciamento](https://informacoes.anatel.gov.br/paineis/outorga-e-licenciamento)
+> 
+> Contatos para obter acesso à API:
+> - [WhatsApp](https://api.whatsapp.com/send/?phone=5584998667245&text=Como+obter+acesso+a+API%3F&type=phone_number&app_absent=0)
+> - [Telegram](https://t.me/LucasMidia)
 
 
 # Implementar bloqueios de domínios
