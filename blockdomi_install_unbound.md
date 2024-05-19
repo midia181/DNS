@@ -1,8 +1,6 @@
-# Bloquear sites pelo DNS (UNBOUND) Response Policy Zones
-# API BlockDomi Client UNBOUND
-Obtenha acesso a API:
-https://wa.me/5584998667245?text=Como+obter+acesso+a+API%3F
-# DNS PRIMARIO (MASTER)
+Implementar bloqueios de domínios
+A restrição de domínios no sistema de DNS deve ser configurada no servidor DNS recursivo utilizado pelos clientes do provedor de Internet.
+Bloqueio de domínios no Unbound
 Crie um diretório onde irá ficar o script do BLOCKDOMI:
 ```plaintext
 mkdir /etc/unbound/scripts
