@@ -9,7 +9,6 @@
 > - <a href="https://t.me/LucasMidia" target="_blank">Telegram</a>
 
 
-
 # Implementar bloqueios de domínios
 A restrição de domínios no sistema de DNS deve ser configurada no servidor DNS recursivo utilizado pelos clientes do provedor de Internet.
 
