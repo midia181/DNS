@@ -17,9 +17,13 @@ Para o bloqueio funcionar corretamente, o DNS Cache do mikrotik precisa esta hab
 Recomendo mudar o quanto antes para Unbound ou Bind9 em servidores Debian/Ubuntu.
 
 1 - No winbox, vá para o item de menu IP > DNS. A janela configurações de DNS será exibida.
+
 2 - Coloque os IPs fornecidos pelo ISP, ou utilize servidores publicos de DNS, (como google [8.8.8.8, 8.8.4.4], cloudfare [1.1.1.1, 1.0.0.1] etc...)
+
 3 - Clique na caixa de seleção para permitir solicitações remotas,(Allow Remote Requests), Ele habilitará o recurso DNS do cache do MikroTik Router.
+
 4 - Opcionalmente, você pode alterar o tamanho do cache colocando o tamanho personalizado na caixa de entrada Tamanho do cache. O tamanho padrão do cache é 2048 KiB ou 2MB.
+
 5 - Clique no botão Aplicar e OK.
 
 O DNS do MikroTik Caching agora está habilitado e você pode usar qualquer um dos seus MikroTik IP como DNS IP para o seu cliente de rede. Se tudo estiver OK, seu cliente receberá resposta do servidor DNS do cache MikroTik. Para verificar seu cache de DNS, vá para o item de menu IP> DNS e clique no botão Cache. Você encontrará o nome de domínio em cache na janela Cache DNS. Se desejar, você pode liberar o objeto em cache clicando no botão Liberar Cache.
