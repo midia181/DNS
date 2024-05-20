@@ -5,7 +5,7 @@
 > Confira seu CNPJ aqui: <a href="https://informacoes.anatel.gov.br/paineis/outorga-e-licenciamento" target="_blank">ANATEL Outorga e Licenciamento</a>
 > 
 > Contatos para obter acesso à API:
-> - <a href="https://api.whatsapp.com/send/?phone=5584998667245&text=Como+obter+acesso+a+API%3F&type=phone_number&app_absent=0" target="_blank">WhatsApp</a>
+> - <a href="https://wa.me/5584998667245?text=Como+obter+acesso+a+API%3F" target="_blank">WhatsApp</a>
 > - <a href="https://t.me/LucasMidia" target="_blank">Telegram</a>
 
 
