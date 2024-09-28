@@ -1,6 +1,6 @@
 ## Bloqueios na Internet
 
-> **Confidencial**: Em razão da natureza sensível da informação ou das circunstâncias de sua divulgação, os domínios/sites bloqueados são considerados confidenciais. Apenas empresas de telecomunicações registradas na Anatel têm permissão para acessar a API.
+> **Confidencial**: Devido à natureza delicada das informações ou ao contexto de sua disseminação, os domínios e sites restritos são tratados como confidenciais. O acesso à API é exclusivo para empresas de telecomunicações devidamente registradas na Anatel.
 > 
 > Confira seu CNPJ aqui: <a href="https://informacoes.anatel.gov.br/paineis/outorga-e-licenciamento" target="_blank">ANATEL Outorga e Licenciamento</a>
 > 
