@@ -85,7 +85,7 @@ nano /etc/unbound/unbound.conf
 # (conteudo atual)
 
 server:
-    include: /etc/unbound/anablock.conf
+    include: /etc/unbound/blockdomi/blockdomi.conf
 ```
 Feito isso verifique se o unbound não contem erros de configurações
 ```plaintext
