@@ -81,8 +81,11 @@ Adicione o arquivo de configuração do blockdomi no parametro server: do arquiv
 nano /etc/unbound/unbound.conf
 ```
 ```plaintext
+# Arquivo /etc/unbound/unbound.conf
+# (conteudo atual)
+
 server:
-	include: /etc/unbound/blockdomi/blockdomi.conf
+    include: /etc/unbound/anablock.conf
 ```
 Feito isso verifique se o unbound não contem erros de configurações
 ```plaintext
