@@ -52,7 +52,7 @@ cd /etc/bind/scripts
 ```plaintext
 wget https://raw.githubusercontent.com/midia181/client_blockdomi/refs/heads/main/blockdomi-bind9.sh
 ```
-Dê permissão de execulção para o script bash.
+Dê permissão de execução para o script bash.
 ```plaintext
 chmod +x /etc/bind/scripts/blockdomi-bind9.sh
 ```
