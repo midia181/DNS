@@ -52,12 +52,12 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
     include: /etc/unbound/blockdomi/blockdomi.conf
     ```
     
-    <pre>
+<pre>
     # (conteudo atual)
     
     server:
         include: /etc/unbound/blockdomi/blockdomi.conf
-    </pre>
+</pre>
 
 
     Verifique se o unbound não contem erros de configurações
