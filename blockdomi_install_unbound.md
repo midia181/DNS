@@ -109,7 +109,7 @@ dig dominiobloqueado.com @localhost
 ;; communications error to ::1#53: connection refused
 ;; communications error to ::1#53: connection refused
 
-; <<>> DiG 9.18.24-1-Debian <<>> www.iairsampaio.com @localhost
+; <<>> DiG 9.18.24-1-Debian <<>> dominiobloqueado.com @localhost
 ;; global options: +cmd
 ;; Got answer:
 ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 8506
