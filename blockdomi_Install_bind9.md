@@ -72,10 +72,6 @@ Seu diretório terá os seguintes arquivos
 ```plaintext
 tree -h /etc/bind/blockdomi/
 ```
-Caso não tenha o tree instalado
-```plaintext
-sudo apt install tree
-```
 <pre>
 /etc/bind/blockdomi/
 ├── [546K]  db.rpz.zone.hosts
@@ -84,6 +80,10 @@ sudo apt install tree
 
 0 directories, 3 files
 </pre>
+Caso não tenha o tree instalado
+```plaintext
+sudo apt install tree
+```
 Se você executar o script novamente:
 <pre>
 Diretório /etc/bind/blockdomi já existe.
@@ -92,7 +92,7 @@ Já está na versão mais atual: 2024101202.
 Para que tenhamos nossa lista sempre atualizada, colocamos o script para ser executado todos os dias a meia noite.
 
 ```plaintext
-echo '00 00   * * *   root    /etc/bind/scripts/blockdomi.sh localhost' >> /etc/crontab
+echo '00 00   * * *   root    /etc/bind/scripts/blockdomi-bind9.sh localhost' >> /etc/crontab
 ```
 Depois reinicie o cron
 ```plaintext
@@ -105,6 +105,10 @@ cat /etc/bind/blockdomi/domain_all
 Apos rodar o script poderá testar os dominios bloqueados, substitua o dominiobloqueado.com pelo dominio que deseja testar o bloqueio:
 ```plaintext
 dig dominiobloqueado.com @localhost
+```
+Caso não tenha os pacotes dnsutils para testar com o dig:
+```plaintext
+apt install dnsutils
 ```
 <pre>
 ; <<>> DiG 9.11.5-P4-5.1+deb10u9-Debian <<>> dominiobloqueado.com @localhost
