@@ -202,4 +202,10 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
       ;; MSG SIZE  rcvd: 176
     </pre>
 
-
+    
+    Observe que o domínio `assistirseriesmp4.com` está sendo redirecionado para o `localhost`:
+    
+    <pre>
+      assistirseriesmp4.com.  5       IN      CNAME   localhost.
+      localhost.              604800  IN      A       127.0.0.1
+    </pre>
