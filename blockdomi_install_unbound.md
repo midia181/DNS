@@ -53,10 +53,10 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
     ```
     
    <pre>
-      (conteudo atual)
+   (conteudo atual)
        
-       server:
-           include: /etc/unbound/blockdomi/blockdomi.conf
+   server:
+      include: /etc/unbound/blockdomi/blockdomi.conf
    </pre>
 
 
