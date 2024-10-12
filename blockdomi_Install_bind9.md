@@ -16,7 +16,26 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
 
 ### Bloqueio de Domínios no Bind9
 
-1. **Adicionar Zona ao Bind9**
+1. **Criar Diretório e Baixar Script**
+
+   Crie um diretório onde o script do BLOCKDOMI será armazenado e baixe o script:
+
+   ```plaintext
+   mkdir /etc/bind/scripts
+   cd /etc/bind/scripts
+   wget https://raw.githubusercontent.com/midia181/client_blockdomi/refs/heads/main/blockdomi-bind9.sh
+   ```
+
+
+2. **Permissões de Execução para o Script**
+
+   Dê permissão de execução ao script:
+
+   ```plaintext
+   chmod +x /etc/bind/scripts/blockdomi-bind9.sh
+   ```
+   
+3. **Adicionar Zona ao Bind9**
 
    Adicione uma zona chamada `blockdomi.zone` no arquivo `/etc/bind/named.conf.default-zones`:
 
@@ -24,8 +43,85 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    sudo sed -i '$a\zone "blockdomi.zone" {\n    type master;\n    file "/etc/bind/blockdomi/db.rpz.zone.hosts";\n};' /etc/bind/named.conf.default-zones
    ```
 
+4. **Adicionar Response Policy**
 
-2. **Configurar os Domínios Bloqueados**
+   Adicione o `response-policy` no arquivo `/etc/bind/named.conf.options`:
+
+   ```plaintext
+   sudo sed -i '/^};/i \    response-policy {\n        zone "blockdomi.zone";\n    };' /etc/bind/named.conf.options
+   ```
+
+5. **Executar o Script**
+
+   Execute o script para sincronizar com a API do BLOCKDOMI:
+
+   ```plaintext
+   /etc/bind/scripts/blockdomi-bind9.sh localhost
+   ```
+
+   > Caso utilize um domínio para a página de bloqueio, substitua `localhost` pelo seu domínio.
+
+6. **Verificar Mensagens do Script**
+
+   Ao rodar o script pela primeira vez, se tudo ocorrer bem, a mensagem exibida será:
+
+   <pre>
+   Diretório /etc/bind/blockdomi criado com sucesso.
+   Versão local não encontrada, baixando a versão 2024101202.
+   Arquivo de zona RPZ atualizado.
+   Permissões do diretório alteradas com sucesso.
+   Serviço Bind9 recarregado com sucesso.
+   </pre>
+
+
+   O diretório `/etc/bind/blockdomi/` terá os seguintes arquivos:
+
+   ```plaintext
+   tree -h /etc/bind/blockdomi/
+   ```
+
+   <pre>
+   /etc/bind/blockdomi/
+   ├── [546K]  db.rpz.zone.hosts
+   ├── [118K]  domain_all
+   └── [  10]  version
+
+   0 directories, 3 files
+   </pre>
+
+   Caso não tenha o `tree` instalado:
+
+   ```plaintext
+   sudo apt install tree
+   ```
+
+
+7. **Executar o Script Novamente**
+
+   Se o script for executado novamente com a mesma versão, a mensagem exibida será:
+
+   <pre>
+   Diretório /etc/bind/blockdomi já existe.
+   Já está na versão mais atual: 2024101202.
+   </pre>
+
+
+8. **Automatizar a Execução do Script**
+
+   Para manter a lista sempre atualizada, configure o script para ser executado diariamente à meia-noite:
+
+   ```plaintext
+   echo '00 00   * * *   root    /etc/bind/scripts/blockdomi-bind9.sh localhost' >> /etc/crontab
+   ```
+
+   > Caso utilize um domínio para a página de bloqueio, substitua `localhost` pelo seu domínio.
+
+   Reinicie o cron:
+
+   ```plaintext
+   systemctl restart cron
+   ```
+9. **Domínios Bloqueados**
 
    No arquivo `/etc/bind/blockdomi/db.rpz.zone.hosts` segue o exemplo de como irá ficar os dominios bloqueados:
 
@@ -51,110 +147,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    assistirseriesmp4.com IN CNAME localhost.
    *.assistirseriesmp4.com IN CNAME localhost.
    /pre>
-
-
-3. **Adicionar Response Policy**
-
-   Adicione o `response-policy` no arquivo `/etc/bind/named.conf.options`:
-
-   ```plaintext
-   sudo sed -i '/^};/i \    response-policy {\n        zone "blockdomi.zone";\n    };' /etc/bind/named.conf.options
-   ```
-
-
-4. **Criar Diretório e Baixar Script**
-
-   Crie um diretório onde o script do BLOCKDOMI será armazenado e baixe o script:
-
-   ```plaintext
-   mkdir /etc/bind/scripts
-   cd /etc/bind/scripts
-   wget https://raw.githubusercontent.com/midia181/client_blockdomi/refs/heads/main/blockdomi-bind9.sh
-   ```
-
-
-5. **Permissões de Execução para o Script**
-
-   Dê permissão de execução ao script:
-
-   ```plaintext
-   chmod +x /etc/bind/scripts/blockdomi-bind9.sh
-   ```
-
-
-6. **Executar o Script**
-
-   Execute o script para sincronizar com a API do BLOCKDOMI:
-
-   ```plaintext
-   /etc/bind/scripts/blockdomi-bind9.sh localhost
-   ```
-
-
-   > Caso utilize um domínio para a página de bloqueio, substitua `localhost` pelo seu domínio.
-
-7. **Verificar Mensagens do Script**
-
-   Ao rodar o script pela primeira vez, se tudo ocorrer bem, a mensagem exibida será:
-
-   <pre>
-   Diretório /etc/bind/blockdomi criado com sucesso.
-   Versão local não encontrada, baixando a versão 2024101202.
-   Arquivo de zona RPZ atualizado.
-   Permissões do diretório alteradas com sucesso.
-   Serviço Bind9 recarregado com sucesso.
-   </pre>
-
-
-   O diretório `/etc/bind/blockdomi/` terá os seguintes arquivos:
-
-   ```plaintext
-   tree -h /etc/bind/blockdomi/
-   ```
-
-
-   <pre>
-   /etc/bind/blockdomi/
-   ├── [546K]  db.rpz.zone.hosts
-   ├── [118K]  domain_all
-   └── [  10]  version
-
-   0 directories, 3 files
-   </pre>
-
-
-   Caso não tenha o `tree` instalado:
-
-   ```plaintext
-   sudo apt install tree
-   ```
-
-
-8. **Executar o Script Novamente**
-
-   Se o script for executado novamente, a mensagem exibida será:
-
-   <pre>
-   Diretório /etc/bind/blockdomi já existe.
-   Já está na versão mais atual: 2024101202.
-   </pre>
-
-
-9. **Automatizar a Execução do Script**
-
-   Para manter a lista sempre atualizada, configure o script para ser executado diariamente à meia-noite:
-
-   ```plaintext
-   echo '00 00   * * *   root    /etc/bind/scripts/blockdomi-bind9.sh localhost' >> /etc/crontab
-   ```
-
-
-   Reinicie o cron:
-
-   ```plaintext
-   systemctl restart cron
-   ```
-
+      
 
 10. **Verificar Domínios Bloqueados**
 
@@ -167,10 +160,10 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
 
 11. **Testar Domínios Bloqueados**
 
-    Após rodar o script, você poderá testar os domínios bloqueados substituindo `dominiobloqueado.com` pelo domínio que deseja testar:
+    Após rodar o script, você poderá testar os domínios bloqueados substituindo `assistirseriesmp4.com` pelo domínio que deseja testar:
 
     ```plaintext
-    dig dominiobloqueado.com @localhost
+    dig assistirseriesmp4.com @localhost
     ```
 
 
@@ -184,26 +177,29 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
     Exemplo de saída do comando `dig`:
 
     <pre>
-    ; <<>> DiG 9.11.5-P4-5.1+deb10u9-Debian <<>> dominiobloqueado.com @localhost
-    ;; global options: +cmd
-    ;; Got answer:
-    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 42124
-    ;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
-
-    ;; OPT PSEUDOSECTION:
-    ; EDNS: version: 0, flags:; udp: 4096
-    ; COOKIE: be484fb71dfe219dd9e6544465ae7d4b7e142ef750ed0d80 (good)
-    ;; QUESTION SECTION:
-    ;dominiobloqueado.com.	IN	A
-
-    ;; ANSWER SECTION:
-    dominiobloqueado.com.    5   IN  CNAME   localhost.
-    localhost.               10800   IN  A   x.x.x.x
-
-    ;; Query time: 479 msec
-    ;; SERVER: ::1#53(::1)
-    ;; WHEN: seg jan 22 11:35:55 -03 2024
-    ;; MSG SIZE  rcvd: 137
+   ; <<>> DiG 9.16.50-Debian <<>> assistirseriesmp4.com @localhost
+   ;; global options: +cmd
+   ;; Got answer:
+   ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 23555
+   ;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 2
+   
+   ;; OPT PSEUDOSECTION:
+   ; EDNS: version: 0, flags:; udp: 1232
+   ; COOKIE: bb21e28a5d506ebe01000000670ac85874808e2b1b5e2c57 (good)
+   ;; QUESTION SECTION:
+   ;assistirseriesmp4.com.         IN      A
+   
+   ;; ANSWER SECTION:
+   assistirseriesmp4.com.  5       IN      CNAME   localhost.
+   localhost.              604800  IN      A       127.0.0.1
+   
+   ;; ADDITIONAL SECTION:
+   blockdomi.zone.         1       IN      SOA     LOCALHOST. localhost. 2024101201 3600 900 2592000 7200
+   
+   ;; Query time: 552 msec
+   ;; SERVER: ::1#53(::1)
+   ;; WHEN: Sat Oct 12 16:04:56 -03 2024
+   ;; MSG SIZE  rcvd: 176
     </pre>
 
 
