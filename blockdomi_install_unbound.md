@@ -104,7 +104,7 @@ Apos rodar o script poderá testar os dominios bloqueados, substitua o dominiobl
 ```plaintext
 dig dominiobloqueado.com @localhost
 ```
+![image](https://github.com/user-attachments/assets/84750eb6-d995-45c9-9290-3c2e7698fc3a)
 
-![image](https://github.com/user-attachments/assets/7d5e02d8-c544-4237-b043-f69a498c3379)
 
 
