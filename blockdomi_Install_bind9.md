@@ -183,4 +183,3 @@ localhost. 10800	IN A	x.x.x.x
 ;; WHEN: seg jan 22 11:35:55 -03 2024
 ;; MSG SIZE  rcvd: 137
 </pre>
-
