@@ -23,13 +23,17 @@ cd /etc/unbound/scripts
 ```plaintext
 wget https://raw.githubusercontent.com/midia181/client_blockdomi/refs/heads/main/blockdomi-unbound.sh
 ```
+Dê permissão de execução para o script bash.
+```plaintext
+chmod +x /etc/unbound/scripts/blockdomi-unbound.sh
+```
 No debian 12 irá precisar instalar o pacote unbound-anchor (caso nao tenha instalado) o mesmo não vem instalado por padrao.
 ```plaintext
 apt install unbound-anchor
 ```
 Execulte o script para sicronizar com a API do BLOCKDOMI (Caso utilize dominio para pagina de bloqueio, substitua 127.0.0.1 por seu dominio):
 ```plaintext
-. /etc/unbound/scripts/blockdomi-unbound.sh 127.0.0.1
+/etc/unbound/scripts/blockdomi-unbound.sh 127.0.0.1
 ```
 Ao rodar o script pela primeira vez se tudo ocorrer bem a menssagem irá aparecer:
 <pre>
@@ -70,7 +74,7 @@ Já está na versão mais atual: 2024101104.
 Para que tenhamos nossa lista sempre atualizada, colocamos o script para ser executado todos os dias a meia noite.
 (Caso utilize dominio para pagina de bloqueio, substitua 127.0.0.1 por seu dominio):
 ```plaintext
-echo '00 00   * * *   root    . /etc/unbound/scripts/blockdomi-unbound.sh 127.0.0.1' >> /etc/crontab
+echo '00 00   * * *   root    /etc/unbound/scripts/blockdomi-unbound.sh 127.0.0.1' >> /etc/crontab
 ```
 Depois reinicie o cron
 ```plaintext
