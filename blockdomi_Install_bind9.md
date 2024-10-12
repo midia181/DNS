@@ -32,7 +32,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    Dê permissão de execução ao script:
 
    ```plaintext
-   chmod +x /etc/bind/scripts/blockdomi-bind9.sh
+   sudo chmod +x /etc/bind/scripts/blockdomi-bind9.sh
    ```
    
 3. **Adicionar Zona ao Bind9**
@@ -56,7 +56,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    Execute o script para sincronizar com a API do BLOCKDOMI:
 
    ```plaintext
-   /etc/bind/scripts/blockdomi-bind9.sh localhost
+   sudo /etc/bind/scripts/blockdomi-bind9.sh localhost
    ```
 
    > Caso utilize um domínio para a página de bloqueio, substitua `localhost` pelo seu domínio.
