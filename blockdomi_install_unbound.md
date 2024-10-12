@@ -105,26 +105,6 @@ Apos rodar o script poderá testar os dominios bloqueados, substitua o dominiobl
 dig dominiobloqueado.com @localhost
 ```
 
-;; communications error to ::1#53: connection refused
-;; communications error to ::1#53: connection refused
-;; communications error to ::1#53: connection refused
+![image](https://github.com/user-attachments/assets/7d5e02d8-c544-4237-b043-f69a498c3379)
 
-; <<>> DiG 9.18.24-1-Debian <<>> dominiobloqueado.com @localhost
-;; global options: +cmd
-;; Got answer:
-;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 8506
-;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
-
-;; OPT PSEUDOSECTION:
-; EDNS: version: 0, flags:; udp: 1232
-;; QUESTION SECTION:
-;dominiobloqueado.com.           IN      A
-
-;; ANSWER SECTION:
-dominiobloqueado.com.    3600    IN      A       127.0.0.1
-
-;; Query time: 0 msec
-;; SERVER: 127.0.0.1#53(localhost) (UDP)
-;; WHEN: Sat Oct 12 10:55:25 -03 2024
-;; MSG SIZE  rcvd: 64
 
