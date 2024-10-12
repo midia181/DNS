@@ -21,7 +21,6 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    Adicione uma zona chamada `blockdomi.zone` no arquivo `/etc/bind/named.conf.default-zones`:
 
    ```plaintext
-
    sudo sed -i '$a\zone "blockdomi.zone" {\n    type master;\n    file "/etc/bind/blockdomi/db.rpz.zone.hosts";\n};' /etc/bind/named.conf.default-zones
    ```
 
@@ -30,7 +29,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
 
    Crie o arquivo `/etc/bind/blockdomi/db.rpz.zone.hosts` para definir os domínios bloqueados:
 
-   ```plaintext
+   <pre>
    $TTL 1H
    @       IN      SOA LOCALHOST. localhost. (
                    2024101201      ; Serial
@@ -43,15 +42,15 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
 
    assistirseriesmp4.com IN CNAME localhost.
    *.assistirseriesmp4.com IN CNAME localhost.
-   ```
+   </pre>
 
 
    Para cada domínio bloqueado, inclua estas linhas:
 
-   ```plaintext
+   <pre>
    assistirseriesmp4.com IN CNAME localhost.
    *.assistirseriesmp4.com IN CNAME localhost.
-   ```
+   /pre>
 
 
 3. **Adicionar Response Policy**
@@ -59,7 +58,6 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    Adicione o `response-policy` no arquivo `/etc/bind/named.conf.options`:
 
    ```plaintext
-
    sudo sed -i '/^};/i \    response-policy {\n        zone "blockdomi.zone";\n    };' /etc/bind/named.conf.options
    ```
 
@@ -69,7 +67,6 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    Crie um diretório onde o script do BLOCKDOMI será armazenado e baixe o script:
 
    ```plaintext
-
    mkdir /etc/bind/scripts
    cd /etc/bind/scripts
    wget https://raw.githubusercontent.com/midia181/client_blockdomi/refs/heads/main/blockdomi-bind9.sh
@@ -81,7 +78,6 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    Dê permissão de execução ao script:
 
    ```plaintext
-
    chmod +x /etc/bind/scripts/blockdomi-bind9.sh
    ```
 
@@ -91,7 +87,6 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    Execute o script para sincronizar com a API do BLOCKDOMI:
 
    ```plaintext
-
    /etc/bind/scripts/blockdomi-bind9.sh localhost
    ```
 
@@ -102,37 +97,35 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
 
    Ao rodar o script pela primeira vez, se tudo ocorrer bem, a mensagem exibida será:
 
-   ```plaintext
+   <pre>
    Diretório /etc/bind/blockdomi criado com sucesso.
    Versão local não encontrada, baixando a versão 2024101202.
    Arquivo de zona RPZ atualizado.
    Permissões do diretório alteradas com sucesso.
    Serviço Bind9 recarregado com sucesso.
-   ```
+   </pre>
 
 
    O diretório `/etc/bind/blockdomi/` terá os seguintes arquivos:
 
    ```plaintext
-
    tree -h /etc/bind/blockdomi/
    ```
 
 
-   ```plaintext
+   <pre>
    /etc/bind/blockdomi/
    ├── [546K]  db.rpz.zone.hosts
    ├── [118K]  domain_all
    └── [  10]  version
 
    0 directories, 3 files
-   ```
+   </pre>
 
 
    Caso não tenha o `tree` instalado:
 
    ```plaintext
-
    sudo apt install tree
    ```
 
@@ -141,10 +134,10 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
 
    Se o script for executado novamente, a mensagem exibida será:
 
-   ```plaintext
+   <pre>
    Diretório /etc/bind/blockdomi já existe.
    Já está na versão mais atual: 2024101202.
-   ```
+   </pre>
 
 
 9. **Automatizar a Execução do Script**
@@ -152,7 +145,6 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    Para manter a lista sempre atualizada, configure o script para ser executado diariamente à meia-noite:
 
    ```plaintext
-
    echo '00 00   * * *   root    /etc/bind/scripts/blockdomi-bind9.sh localhost' >> /etc/crontab
    ```
 
@@ -160,7 +152,6 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    Reinicie o cron:
 
    ```plaintext
-
    systemctl restart cron
    ```
 
@@ -170,7 +161,6 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
     Para verificar os domínios bloqueados:
 
     ```plaintext
-
     cat /etc/bind/blockdomi/domain_all
     ```
 
@@ -180,7 +170,6 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
     Após rodar o script, você poderá testar os domínios bloqueados substituindo `dominiobloqueado.com` pelo domínio que deseja testar:
 
     ```plaintext
-
     dig dominiobloqueado.com @localhost
     ```
 
@@ -188,14 +177,13 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
     Caso não tenha os pacotes `dnsutils` instalados para testar com o `dig`:
 
     ```plaintext
-
     apt install dnsutils
     ```
 
 
     Exemplo de saída do comando `dig`:
 
-    ```plaintext
+    <pre>
     ; <<>> DiG 9.11.5-P4-5.1+deb10u9-Debian <<>> dominiobloqueado.com @localhost
     ;; global options: +cmd
     ;; Got answer:
@@ -216,6 +204,6 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
     ;; SERVER: ::1#53(::1)
     ;; WHEN: seg jan 22 11:35:55 -03 2024
     ;; MSG SIZE  rcvd: 137
-    ```
+    </pre>
 
 
