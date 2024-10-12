@@ -177,29 +177,29 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
     Exemplo de saída do comando `dig`:
 
     <pre>
-   ; <<>> DiG 9.16.50-Debian <<>> assistirseriesmp4.com @localhost
-   ;; global options: +cmd
-   ;; Got answer:
-   ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 23555
-   ;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 2
-   
-   ;; OPT PSEUDOSECTION:
-   ; EDNS: version: 0, flags:; udp: 1232
-   ; COOKIE: bb21e28a5d506ebe01000000670ac85874808e2b1b5e2c57 (good)
-   ;; QUESTION SECTION:
-   ;assistirseriesmp4.com.         IN      A
-   
-   ;; ANSWER SECTION:
-   assistirseriesmp4.com.  5       IN      CNAME   localhost.
-   localhost.              604800  IN      A       127.0.0.1
-   
-   ;; ADDITIONAL SECTION:
-   blockdomi.zone.         1       IN      SOA     LOCALHOST. localhost. 2024101201 3600 900 2592000 7200
-   
-   ;; Query time: 552 msec
-   ;; SERVER: ::1#53(::1)
-   ;; WHEN: Sat Oct 12 16:04:56 -03 2024
-   ;; MSG SIZE  rcvd: 176
+      ; <<>> DiG 9.16.50-Debian <<>> assistirseriesmp4.com @localhost
+      ;; global options: +cmd
+      ;; Got answer:
+      ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 23555
+      ;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 2
+      
+      ;; OPT PSEUDOSECTION:
+      ; EDNS: version: 0, flags:; udp: 1232
+      ; COOKIE: bb21e28a5d506ebe01000000670ac85874808e2b1b5e2c57 (good)
+      ;; QUESTION SECTION:
+      ;assistirseriesmp4.com.         IN      A
+      
+      ;; ANSWER SECTION:
+      assistirseriesmp4.com.  5       IN      CNAME   localhost.
+      localhost.              604800  IN      A       127.0.0.1
+      
+      ;; ADDITIONAL SECTION:
+      blockdomi.zone.         1       IN      SOA     LOCALHOST. localhost. 2024101201 3600 900 2592000 7200
+      
+      ;; Query time: 552 msec
+      ;; SERVER: ::1#53(::1)
+      ;; WHEN: Sat Oct 12 16:04:56 -03 2024
+      ;; MSG SIZE  rcvd: 176
     </pre>
 
 
