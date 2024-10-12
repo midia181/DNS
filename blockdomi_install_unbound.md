@@ -81,7 +81,6 @@ Adicione o arquivo de configuração do blockdomi no parametro server: do arquiv
 nano /etc/unbound/unbound.conf
 ```
 ```plaintext
-# Arquivo /etc/unbound/unbound.conf
 # (conteudo atual)
 
 server:
