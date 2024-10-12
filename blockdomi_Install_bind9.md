@@ -13,49 +13,34 @@
 A restrição de domínios no sistema de DNS deve ser configurada no servidor DNS recursivo utilizado pelos clientes do provedor de Internet.
 
 # Bloqueio de domínios no Bind9
-Crie uma zona chamada rpz.zone em seu /etc/bind/named.conf.local.
+Adicione uma zona chamada blockdomi.zone em seu /etc/bind/named.conf.default-zones.
 ```plaintext
-nano /etc/bind/named.conf.local
-```
-```plaintext
-zone "rpz.zone" {
-    type master;
-    file "/etc/bind/rpz/db.rpz.zone.hosts";
-    allow-query { none; };
-};
+sudo sed -i '$a\zone "blockdomi.zone" {\n    type master;\n    file "/etc/bind/rpz/db.rpz.zone.hosts";\n};' /etc/bind/named.conf.default-zones
 ```
 Na pasta /etc/bind/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
-```plaintext
+<then>
 $TTL 1H
 @       IN      SOA LOCALHOST. localhost. (
-                2024012201      ; Serial  
+                2024101201      ; Serial
                 1h              ; Refresh
                 15m             ; Retry
-                30d             ; Expire 
+                30d             ; Expire
                 2h              ; Negative Cache TTL
         )
         NS  localhost.
-;       ou
-;       NS  localhost.
-sitequeprecisabloquear.com     IN CNAME .
-*.sitequeprecisabloquear.com   IN CNAME .
-elesmandamnosfaz.bo.bo         IN CNAME .
-*.elesmandamnosfaz.bo.bo       IN CNAME .
-```
+
+assistirseriesmp4.com IN CNAME bloqueadosnobrasil.blockdomi.com.
+*.assistirseriesmp4.com IN CNAME bloqueadosnobrasil.blockdomi.com.
+</then>
 A cada dominio bloqueado irá conter:
 ```plaintext
 sitequeprecisabloquear.com        IN CNAME .
 *.sitequeprecisabloquear.com      IN CNAME .
 ```
 Assim qualquer subdomínio (*).domino.com seja traduzido sempre irá ser apontado para seu IP ou localhost.
-Antes de criar o script, ajuste o response-policy dentro do seu /etc/bind/named.conf.options
+Antes de criar o script, iremos adicionar o response-policy dentro do seu /etc/bind/named.conf.options
 ```plaintext
-nano /etc/bind/named.conf.options
-```
-```plaintext
-    response-policy {
-      zone "rpz.zone" policy CNAME localhost;
-    };
+sudo sed -i '/^};/i \    response-policy {\n        zone "blockdomi.zone";\n    };' /etc/bind/named.conf.options
 ```
 Crie um diretório onde irá ficar o script do BLOCKDOMI:
 ```plaintext
