@@ -56,8 +56,7 @@ Dê permissão de execução para o script bash.
 ```plaintext
 chmod +x /etc/bind/scripts/blockdomi-bind9.sh
 ```
-Execulte o script para sicronizar com a API do BLOCKDOMI:
-OBS: Caso queira utilizar um dominio com pagina web substituir o localhost pelo dominio.
+Execulte o script para sicronizar com a API do BLOCKDOMI (Caso utilize dominio para pagina de bloqueio, substitua localhost por seu dominio):
 ```plaintext
 /etc/bind/scripts/blockdomi-bind9.sh localhost
 ```
