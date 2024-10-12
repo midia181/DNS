@@ -32,41 +32,41 @@ Execulte o script para sicronizar com a API do BLOCKDOMI (Caso utilize dominio p
 . /etc/unbound/scripts/blockdomi-unbound.sh 127.0.0.1
 ```
 Ao rodar o script pela primeira vez se tudo ocorrer bem a menssagem irá aparecer:
-```plaintext
+<pre>
 Diretório /etc/unbound/blockdomi criado com sucesso.
 Versão local não encontrada, baixando a versão 2024101104.
 Arquivo de configuração do Unbound atualizado para bloqueio.
 Permissões do diretório alteradas com sucesso.
 unbound-checkconf: no errors in /etc/unbound/unbound.conf
 Serviço Unbound recarregado com sucesso.
-```
+</pre>
 No arquivo /etc/unbound/blockdomi/blockdomi.conf segue o exemplo de como irá ficar os dominios bloqueados
-```plaintext
+<pre>
 local-zone: "sitequeprecisabloquear.com" redirect
 local-data: "sitequeprecisabloquear.com A 127.0.0.1"
-```
+</pre>
 A cada dominio bloqueado irá conter:
-```plaintext
+<pre>
 local-zone: "sitequeprecisabloquear.com" redirect
 local-data: "sitequeprecisabloquear.com A 127.0.0.1"
-```
+</pre>
 Seu diretório terá os seguintes arquivos
 ```plaintext
 tree -h /etc/unbound/blockdomi/
 ```
-```plaintext
+<pre>
 [4.0K]  /etc/unbound/blockdomi/
 ├── [597K]  blockdomi.conf
 ├── [118K]  domain_all
 └── [  10]  version
 
 1 directory, 3 files
-```
+</pre>
 Se você executar o script novamente irá aparecer a seguinte menssagem:
-```plaintext
+<pre>
 Diretório /etc/unbound/blockdomi já existe.
 Já está na versão mais atual: 2024101104.
-```
+</pre>
 Para que tenhamos nossa lista sempre atualizada, colocamos o script para ser executado todos os dias a meia noite.
 (Caso utilize dominio para pagina de bloqueio, substitua 127.0.0.1 por seu dominio):
 ```plaintext
@@ -89,9 +89,9 @@ Feito isso verifique se o unbound não contem erros de configurações
 unbound-checkconf
 ```
 Se não houver erros, o comando retornará:
-```plaintext
+<pre>
 unbound-checkconf: no errors in /etc/unbound/unbound.conf
-```
+</pre>
 Feito isso reinicie o unbound para aplicar as configurações
 ```plaintext
 systemctl restart unbound
@@ -105,23 +105,23 @@ Apos rodar o script poderá testar os dominios bloqueados, substitua o dominiobl
 dig dominiobloqueado.com @localhost
 ```
 <pre>
-🚨 ;; communications error to ::1#53: connection refused
-🚨 ;; communications error to ::1#53: connection refused
-🚨 ;; communications error to ::1#53: connection refused
+;; communications error to ::1#53: connection refused
+;; communications error to ::1#53: connection refused
+;; communications error to ::1#53: connection refused
 
-📘 ; <<>> DiG 9.18.24-1-Debian <<>> dominiobloqueado.com @localhost
+; <<>> DiG 9.18.24-1-Debian <<>> dominiobloqueado.com @localhost
 ;; global options: +cmd
 ;; Got answer:
 ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 8506
 ;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
 
-📘 ;; OPT PSEUDOSECTION:
+;; OPT PSEUDOSECTION:
 ; EDNS: version: 0, flags:; udp: 1232
-📘 ;; QUESTION SECTION:
+;; QUESTION SECTION:
 ;dominiobloqueado.com.           IN      A
 
-📘 ;; ANSWER SECTION:
-dominiobloqueado.com.    3600    IN      A       🟢 127.0.0.1
+;; ANSWER SECTION:
+dominiobloqueado.com.    3600    IN      A       127.0.0.1
 
 ;; Query time: 0 msec
 ;; SERVER: 127.0.0.1#53(localhost) (UDP)
