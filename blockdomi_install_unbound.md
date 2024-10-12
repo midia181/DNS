@@ -21,27 +21,24 @@ mkdir /etc/unbound/scripts
 cd /etc/unbound/scripts
 ```
 ```plaintext
-wget https://raw.githubusercontent.com/midia181/client_blockdomi/main/blockdomi_unbound.py
-```
-Como o script usa o python 3 precisaremos instalar os pacotes nescessários para executa-lo.
-```plaintext
-apt install python3 python3-requests tree python3-termcolor
+wget https://raw.githubusercontent.com/midia181/client_blockdomi/refs/heads/main/blockdomi-unbound.sh
 ```
 No debian 12 irá precisar instalar o pacote unbound-anchor (caso nao tenha instalado) o mesmo não vem instalado por padrao.
 ```plaintext
 apt install unbound-anchor
 ```
-Execulte o script para sicronizar com a API do BLOCKDOMI (Caso utilize dominio para pagina de bloqueio, substitua localhost por seu dominio):
+Execulte o script para sicronizar com a API do BLOCKDOMI (Caso utilize dominio para pagina de bloqueio, substitua 127.0.0.1 por seu dominio):
 ```plaintext
-python3 /etc/unbound/scripts/blockdomi_unbound.py localhost
+. /etc/unbound/scripts/blockdomi-unbound.sh 127.0.0.1
 ```
 Ao rodar o script se tudo ocorrer bem a menssagem irá aparecer:
-```plaintext
-Diretório /etc/unbound/rpz criado com sucesso.
-Arquivo de zona RPZ atualizado.
-Permissões do diretório alteradas com sucesso.
-Serviço Unbound reiniciado com sucesso.
-```
+echo -e "\e[32mDiretório /etc/unbound/rpz criado com sucesso.\e[0m"
+echo -e "\e[33mVersão local não encontrada, baixando a versão 2024101104.\e[0m"
+echo -e "\e[36mArquivo de configuração do Unbound atualizado para bloqueio.\e[0m"
+echo -e "\e[34mPermissões do diretório alteradas com sucesso.\e[0m"
+echo -e "\e[31munbound-checkconf: no errors in /etc/unbound/unbound.conf\e[0m"
+echo -e "\e[32mServiço Unbound recarregado com sucesso.\e[0m"
+
 No arquivo /etc/unbound/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
 ```plaintext
 $TTL 1H
