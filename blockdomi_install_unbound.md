@@ -66,9 +66,9 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
     ```
     Se não houver erros, o comando retornará:
 
-    <pre>
-    unbound-checkconf: no errors in /etc/unbound/unbound.conf
-    </pre>
+   <pre>
+   unbound-checkconf: no errors in /etc/unbound/unbound.conf
+   </pre>
 
 
 5. **Executar o Script**
