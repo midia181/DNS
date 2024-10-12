@@ -146,7 +146,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    <pre>
    assistirseriesmp4.com IN CNAME localhost.
    *.assistirseriesmp4.com IN CNAME localhost.
-   /pre>
+   </pre>
       
 
 10. **Verificar Domínios Bloqueados**
