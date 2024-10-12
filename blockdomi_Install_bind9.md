@@ -15,10 +15,10 @@ A restrição de domínios no sistema de DNS deve ser configurada no servidor DN
 # Bloqueio de domínios no Bind9
 Adicione uma zona chamada blockdomi.zone em seu /etc/bind/named.conf.default-zones.
 ```plaintext
-sudo sed -i '$a\zone "blockdomi.zone" {\n    type master;\n    file "/etc/bind/rpz/db.rpz.zone.hosts";\n};' /etc/bind/named.conf.default-zones
+sudo sed -i '$a\zone "blockdomi.zone" {\n    type master;\n    file "/etc/bind/blockdomi/db.rpz.zone.hosts";\n};' /etc/bind/named.conf.default-zones
 ```
-Na pasta /etc/bind/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
-<then>
+Na pasta /etc/bind/blockdomi/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
+<pre>
 $TTL 1H
 @       IN      SOA LOCALHOST. localhost. (
                 2024101201      ; Serial
@@ -29,14 +29,14 @@ $TTL 1H
         )
         NS  localhost.
 
-assistirseriesmp4.com IN CNAME bloqueadosnobrasil.blockdomi.com.
-*.assistirseriesmp4.com IN CNAME bloqueadosnobrasil.blockdomi.com.
-</then>
+assistirseriesmp4.com IN CNAME localhost.
+*.assistirseriesmp4.com IN CNAME localhost.
+</pre>
 A cada dominio bloqueado irá conter:
-```plaintext
-sitequeprecisabloquear.com        IN CNAME .
-*.sitequeprecisabloquear.com      IN CNAME .
-```
+<pre>
+assistirseriesmp4.com IN CNAME localhost.
+*.assistirseriesmp4.com IN CNAME localhost.
+</pre>
 Assim qualquer subdomínio (*).domino.com seja traduzido sempre irá ser apontado para seu IP ou localhost.
 Antes de criar o script, iremos adicionar o response-policy dentro do seu /etc/bind/named.conf.options
 ```plaintext
@@ -50,39 +50,45 @@ mkdir /etc/bind/scripts
 cd /etc/bind/scripts
 ```
 ```plaintext
-wget https://raw.githubusercontent.com/midia181/client_blockdomi/main/blockdomi_bind9.py
-```
-Como o script usa o python 3 precisaremos instalar os pacotes nescessários para executa-lo.
-```plaintext
-apt install python3 python3-requests tree python3-termcolor
+wget https://raw.githubusercontent.com/midia181/client_blockdomi/refs/heads/main/blockdomi-bind9.sh
 ```
 Execulte o script para sicronizar com a API do BLOCKDOMI:
 ```plaintext
-python3 /etc/bind/scripts/blockdomi_bind9.py localhost
+/etc/bind/scripts/blockdomi.sh localhost
 ```
-Ao rodar o script se tudo ocorrer bem a menssagem irá aparecer:
-```plaintext
+Ao rodar o script a primeira vez se tudo ocorrer bem a menssagem irá aparecer:
+<pre>
+Diretório /etc/bind/blockdomi criado com sucesso.
+Versão local não encontrada, baixando a versão 2024101202.
 Arquivo de zona RPZ atualizado.
 Permissões do diretório alteradas com sucesso.
-Serviço Bind9 reiniciado com sucesso.
-```
+Serviço Bind9 recarregado com sucesso.
+</pre>
 Seu diretório terá os seguintes arquivos
 ```plaintext
-tree -h /etc/bind/rpz/
+tree -h /etc/bind/blockdomi/
 ```
+Caso não tenha o tree instalado
 ```plaintext
-/etc/bind/rpz/
-|-- [299K]  db.rpz.zone.hosts
-|-- [ 86K]  domain_all
-`-- [  10]  version
+sudo apt install tree
+```
+<pre>
+/etc/bind/blockdomi/
+├── [546K]  db.rpz.zone.hosts
+├── [118K]  domain_all
+└── [  10]  version
 
 0 directories, 3 files
-```
-Se você executar o script novamente nada irá acontecer até que uma nova versão seja lancada.
+</pre>
+Se você executar o script novamente:
+<pre>
+Diretório /etc/bind/blockdomi já existe.
+Já está na versão mais atual: 2024101202.
+</pre>
 Para que tenhamos nossa lista sempre atualizada, colocamos o script para ser executado todos os dias a meia noite.
 
 ```plaintext
-echo '00 00   * * *   root    python3 /etc/bind/scripts/blockdomi_bind9.py localhost'\ >> /etc/crontab
+echo '00 00   * * *   root    /etc/bind/scripts/blockdomi.sh localhost' >> /etc/crontab
 ```
 Depois reinicie o cron
 ```plaintext
@@ -90,13 +96,13 @@ systemctl restart cron
 ```
 Verifique os dominios bloqueados:
 ```plaintext
-cat /etc/bind/rpz/domain_all
+cat /etc/bind/blockdomi/domain_all
 ```
 Apos rodar o script poderá testar os dominios bloqueados, substitua o dominiobloqueado.com pelo dominio que deseja testar o bloqueio:
 ```plaintext
 dig dominiobloqueado.com @localhost
 ```
-```plaintext
+<pre>
 ; <<>> DiG 9.11.5-P4-5.1+deb10u9-Debian <<>> dominiobloqueado.com @localhost
 ;; global options: +cmd
 ;; Got answer:
@@ -117,4 +123,4 @@ localhost. 10800	IN A	x.x.x.x
 ;; SERVER: ::1#53(::1)
 ;; WHEN: seg jan 22 11:35:55 -03 2024
 ;; MSG SIZE  rcvd: 137
-```
+</pre>
