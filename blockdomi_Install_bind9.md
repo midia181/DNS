@@ -53,8 +53,9 @@ cd /etc/bind/scripts
 wget https://raw.githubusercontent.com/midia181/client_blockdomi/refs/heads/main/blockdomi-bind9.sh
 ```
 Execulte o script para sicronizar com a API do BLOCKDOMI:
+OBS: Caso queira utilizar um dominio com pagina web substituir o localhost pelo dominio.
 ```plaintext
-/etc/bind/scripts/blockdomi.sh localhost
+/etc/bind/scripts/blockdomi-bind9.sh localhost
 ```
 Ao rodar o script a primeira vez se tudo ocorrer bem a menssagem irá aparecer:
 <pre>
