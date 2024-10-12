@@ -31,71 +31,66 @@ Execulte o script para sicronizar com a API do BLOCKDOMI (Caso utilize dominio p
 ```plaintext
 . /etc/unbound/scripts/blockdomi-unbound.sh 127.0.0.1
 ```
-Ao rodar o script se tudo ocorrer bem a menssagem irá aparecer:
-echo -e "\e[32mDiretório /etc/unbound/rpz criado com sucesso.\e[0m"
-echo -e "\e[33mVersão local não encontrada, baixando a versão 2024101104.\e[0m"
-echo -e "\e[36mArquivo de configuração do Unbound atualizado para bloqueio.\e[0m"
-echo -e "\e[34mPermissões do diretório alteradas com sucesso.\e[0m"
-echo -e "\e[31munbound-checkconf: no errors in /etc/unbound/unbound.conf\e[0m"
-echo -e "\e[32mServiço Unbound recarregado com sucesso.\e[0m"
-
-No arquivo /etc/unbound/rpz/db.rpz.zone.hosts segue o exemplo de como irá ficar os dominios bloqueados
+Ao rodar o script pela primeira vez se tudo ocorrer bem a menssagem irá aparecer:
 ```plaintext
-$TTL 1H
-@       IN      SOA LOCALHOST. localhost. (
-                2024051101      ; Serial
-                1h              ; Refresh
-                15m             ; Retry
-                30d             ; Expire
-                2h              ; Negative Cache TTL
-        )
-        NS  localhost.
-
-sitequeprecisabloquear.com IN CNAME .
-*.sitequeprecisabloquear.com IN CNAME .
+Diretório /etc/unbound/blockdomi criado com sucesso.
+Versão local não encontrada, baixando a versão 2024101104.
+Arquivo de configuração do Unbound atualizado para bloqueio.
+Permissões do diretório alteradas com sucesso.
+unbound-checkconf: no errors in /etc/unbound/unbound.conf
+Serviço Unbound recarregado com sucesso.
+```
+No arquivo /etc/unbound/blockdomi/blockdomi.conf segue o exemplo de como irá ficar os dominios bloqueados
+```plaintext
+local-zone: "sitequeprecisabloquear.com" redirect
+local-data: "sitequeprecisabloquear.com A 127.0.0.1"
 ```
 A cada dominio bloqueado irá conter:
 ```plaintext
-sitequeprecisabloquear.com IN CNAME .
-*.sitequeprecisabloquear.com IN CNAME .
+local-zone: "sitequeprecisabloquear.com" redirect
+local-data: "sitequeprecisabloquear.com A 127.0.0.1"
 ```
 Seu diretório terá os seguintes arquivos
 ```plaintext
-tree -h /etc/unbound/rpz/
+tree -h /etc/unbound/blockdomi/
 ```
 ```plaintext
-[4.0K]  /etc/unbound/rpz/
-├── [301K]  db.rpz.block.zone.hosts
-├── [ 86K]  domain_all
+[4.0K]  /etc/unbound/blockdomi/
+├── [597K]  blockdomi.conf
+├── [118K]  domain_all
 └── [  10]  version
 
 1 directory, 3 files
 ```
 Se você executar o script novamente irá aparecer a seguinte menssagem:
 ```plaintext
-Diretório /etc/unbound/rpz já existe.
-Já está na versão mais atual.
+Diretório /etc/unbound/blockdomi já existe.
+Já está na versão mais atual: 2024101104.
 ```
 Para que tenhamos nossa lista sempre atualizada, colocamos o script para ser executado todos os dias a meia noite.
-(Caso utilize dominio para pagina de bloqueio, substitua localhost por seu dominio):
+(Caso utilize dominio para pagina de bloqueio, substitua 127.0.0.1 por seu dominio):
 ```plaintext
-echo '00 00   * * *   root    python3 /etc/unbound/scripts/blockdomi_unbound.py localhost'\ >> /etc/crontab
+echo '00 00   * * *   root    . /etc/unbound/scripts/blockdomi-unbound.sh 127.0.0.1' >> /etc/crontab
 ```
 Depois reinicie o cron
 ```plaintext
 systemctl restart cron
 ```
-Adicione a RPZ no final do arquivo /etc/unbound/unbound.conf
+Adicione o arquivo de configuração do blockdomi no parametro server: do arquivo /etc/unbound/unbound.conf
 ```plaintext
 nano /etc/unbound/unbound.conf
 ```
 ```plaintext
-module-config: "respip validator iterator"
-rpz:
-    name: localhost
-    zonefile: /etc/unbound/rpz/db.rpz.block.zone.hosts
-    rpz-action-override: cname
-    rpz-cname-override: "localhost."
+server:
+	include: /etc/unbound/blockdomi/blockdomi.conf
+```
+Feito isso verifique se o unbound não contem erros de configurações
+```plaintext
+unbound-checkconf
+```
+Caso não contenha erro irá aparecer a seguinte menssagem:
+```plaintext
+unbound-checkconf: no errors in /etc/unbound/unbound.conf
 ```
 Feito isso reinicie o unbound para aplicar as configurações
 ```plaintext
@@ -103,31 +98,33 @@ systemctl restart unbound
 ```
 Verifique os dominios bloqueados:
 ```plaintext
-cat /etc/unbound/rpz/domain_all
+cat /etc/unbound/blockdomi/domain_all
 ```
 Apos rodar o script poderá testar os dominios bloqueados, substitua o dominiobloqueado.com pelo dominio que deseja testar o bloqueio:
 ```plaintext
 dig dominiobloqueado.com @localhost
 ```
 ```plaintext
-; <<>> DiG 9.11.5-P4-5.1+deb10u9-Debian <<>> dominiobloqueado.com @localhost
+;; communications error to ::1#53: connection refused
+;; communications error to ::1#53: connection refused
+;; communications error to ::1#53: connection refused
+
+; <<>> DiG 9.18.24-1-Debian <<>> www.iairsampaio.com @localhost
 ;; global options: +cmd
 ;; Got answer:
-;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 42124
-;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
- 
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 8506
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
 ;; OPT PSEUDOSECTION:
-; EDNS: version: 0, flags:; udp: 4096
-; COOKIE: be484fb71dfe219dd9e6544465ae7d4b7e142ef750ed0d80 (good)
+; EDNS: version: 0, flags:; udp: 1232
 ;; QUESTION SECTION:
-;dominiobloqueado.com.		IN	A
- 
+;dominiobloqueado.com.           IN      A
+
 ;; ANSWER SECTION:
-dominiobloqueado.com.	5	IN	CNAME	localhost.
-localhost. 10800	IN A	x.x.x.x
- 
-;; Query time: 479 msec
-;; SERVER: ::1#53(::1)
-;; WHEN: seg jan 22 11:35:55 -03 2024
-;; MSG SIZE  rcvd: 137
+dominiobloqueado.com.    3600    IN      A       127.0.0.1
+
+;; Query time: 0 msec
+;; SERVER: 127.0.0.1#53(localhost) (UDP)
+;; WHEN: Sat Oct 12 10:55:25 -03 2024
+;; MSG SIZE  rcvd: 64
 ```
