@@ -88,7 +88,7 @@ Feito isso verifique se o unbound não contem erros de configurações
 ```plaintext
 unbound-checkconf
 ```
-Caso não contenha erro irá aparecer a seguinte menssagem:
+Se não houver erros, o comando retornará:
 ```plaintext
 unbound-checkconf: no errors in /etc/unbound/unbound.conf
 ```
