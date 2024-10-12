@@ -24,7 +24,7 @@ sudo sed -i '$a\zone "blockdomi.zone" {\n    type master;\n    file "/etc/bind/b
 #### 2. Configuração da Zona de Bloqueio
 Na pasta `/etc/bind/blockdomi/`, crie o arquivo `db.rpz.zone.hosts` e adicione os domínios a serem bloqueados:
 
-```plaintext
+```
 $TTL 1H
 @       IN      SOA LOCALHOST. localhost. (
                 2024101201      ; Serial
@@ -41,7 +41,7 @@ assistirseriesmp4.com IN CNAME localhost.
 
 A cada domínio bloqueado, adicione uma entrada como esta:
 
-```plaintext
+```
 assistirseriesmp4.com IN CNAME localhost.
 *.assistirseriesmp4.com IN CNAME localhost.
 ```
@@ -88,7 +88,7 @@ Execute o script para sincronizar com a API do BlockDomi (substitua `localhost` 
 
 Ao rodar o script pela primeira vez, a seguinte mensagem deve aparecer:
 
-```plaintext
+```
 Diretório /etc/bind/blockdomi criado com sucesso.
 Versão local não encontrada, baixando a versão 2024101202.
 Arquivo de zona RPZ atualizado.
@@ -105,7 +105,7 @@ tree -h /etc/bind/blockdomi/
 
 Saída esperada:
 
-```plaintext
+```
 /etc/bind/blockdomi/
 ├── [546K]  db.rpz.zone.hosts
 ├── [118K]  domain_all
@@ -122,7 +122,7 @@ sudo apt install tree
 
 Se você executar o script novamente, a seguinte mensagem deve aparecer:
 
-```plaintext
+```
 Diretório /etc/bind/blockdomi já existe.
 Já está na versão mais atual: 2024101202.
 ```
@@ -161,26 +161,26 @@ apt install dnsutils
 
 Exemplo de saída:
 
-```plaintext
+<pre>
 ; <<>> DiG 9.11.5-P4-5.1+deb10u9-Debian <<>> dominiobloqueado.com @localhost
 ;; global options: +cmd
 ;; Got answer:
 ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 42124
 ;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
-
+ 
 ;; OPT PSEUDOSECTION:
 ; EDNS: version: 0, flags:; udp: 4096
 ; COOKIE: be484fb71dfe219dd9e6544465ae7d4b7e142ef750ed0d80 (good)
 ;; QUESTION SECTION:
 ;dominiobloqueado.com.	IN	A
-
+ 
 ;; ANSWER SECTION:
 dominiobloqueado.com.	5	IN	CNAME	localhost.
 localhost. 10800	IN A	x.x.x.x
-
+ 
 ;; Query time: 479 msec
 ;; SERVER: ::1#53(::1)
 ;; WHEN: seg jan 22 11:35:55 -03 2024
 ;; MSG SIZE  rcvd: 137
-```
+</pre>
 
