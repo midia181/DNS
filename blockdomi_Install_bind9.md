@@ -27,7 +27,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
 
 2. **Configurar os Domínios Bloqueados**
 
-   Crie o arquivo `/etc/bind/blockdomi/db.rpz.zone.hosts` para definir os domínios bloqueados:
+   No arquivo `/etc/bind/blockdomi/db.rpz.zone.hosts` segue o exemplo de como irá ficar os dominios bloqueados:
 
    <pre>
    $TTL 1H
@@ -45,7 +45,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    </pre>
 
 
-   Para cada domínio bloqueado, inclua estas linhas:
+   Para cada domínio bloqueado, irá conter:
 
    <pre>
    assistirseriesmp4.com IN CNAME localhost.
