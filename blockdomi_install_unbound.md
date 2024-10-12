@@ -105,23 +105,23 @@ Apos rodar o script poderá testar os dominios bloqueados, substitua o dominiobl
 dig dominiobloqueado.com @localhost
 ```
 <pre>
-;; communications error to ::1#53: connection refused
-;; communications error to ::1#53: connection refused
-;; communications error to ::1#53: connection refused
+<span style="color: red;">;; communications error to ::1#53: connection refused</span>
+<span style="color: red;">;; communications error to ::1#53: connection refused</span>
+<span style="color: red;">;; communications error to ::1#53: connection refused</span>
 
-; <<>> DiG 9.18.24-1-Debian <<>> dominiobloqueado.com @localhost
+<span style="color: blue;">; <<>> DiG 9.18.24-1-Debian <<>> dominiobloqueado.com @localhost</span>
 ;; global options: +cmd
 ;; Got answer:
-;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 8506
+;; ->>HEADER<<- opcode: QUERY, <span style="color: green;">status: NOERROR</span>, id: 8506
 ;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
 
-;; OPT PSEUDOSECTION:
+<span style="color: blue;">;; OPT PSEUDOSECTION:</span>
 ; EDNS: version: 0, flags:; udp: 1232
-;; QUESTION SECTION:
+<span style="color: blue;">;; QUESTION SECTION:</span>
 ;dominiobloqueado.com.           IN      A
 
-;; ANSWER SECTION:
-dominiobloqueado.com.    3600    IN      A       127.0.0.1
+<span style="color: blue;">;; ANSWER SECTION:</span>
+dominiobloqueado.com.    3600    IN      A       <span style="color: green;">127.0.0.1</span>
 
 ;; Query time: 0 msec
 ;; SERVER: 127.0.0.1#53(localhost) (UDP)
