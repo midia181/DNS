@@ -46,13 +46,16 @@ Para integrar o Mikrotik ao BlockDomi com acesso via SSH ou Winbox (Terminal), E
 /log warning \"Importacao de dominios bloqueados concluida\"; \
 /file remove blocked_domains.rsc;"
 ```
-Aguarde finalizar o procedimento... 
+Após colocado o script, garanta que ele roda altomaticamente via scherduler
+```plaintext
+/system scheduler add name="DailyBlockDomiImport" start-time=01:00:00 interval=1d on-event="BlockDomiImport"
+```
 siga os passos para garantir que o mikrotik irá sicronizar altomaticamente com o blockdomi
 
-1º - Verifique em System > Scripts, veja se o script "update-mikrotik-domains" estará criado.
-2º - Verifique em System > Scheduler, se a rotina "update-mikrotik-domains-scheduler" foi criada.
+1º - Verifique em System > Scripts, veja se o script "BlockDomiImport" estará criado.
+2º - Verifique em System > Scheduler, se a rotina "BlockDomiImport" foi criada.
 3º - Verifique os dominios bloqueados em IP > DNS > Static
-4º - Verifique as regras input que bloqueia invasões a porta 53 em IP > Firewall > Filter Rules irá conter uma regra com nome "Bloqueia Conex~~oes Entrantes na Porta 53"
+4º - Verifique as regras input que bloqueia invasões a porta 53 em IP > Firewall > Filter Rules irá conter uma regra com nome "Bloqueia Conexões Entrantes na Porta 53"
 
 
 Validando as configurações acima tudo irá acontecer como esperado.
