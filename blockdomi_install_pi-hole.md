@@ -16,18 +16,12 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
 
 ### Bloqueio de Domínios no Pi-Hole
 
-1. **No menu lateral esquerdo Procurar Adlists:**
+1. **Adicione a lista de dominios**
 
-![image](https://i.imgur.com/CFMob5f.png)
-
-
-
-2. **Adicione a lista de dominios**
-
-![image](https://i.imgur.com/cmkR46z.png)
+![image](https://i.imgur.com/qGUjsPU.png)
 
 
-3. **No terminal atualize a lista**
+2. **No terminal atualize a lista**
 
 Após adicionar a lista de dominios, é necessário atualizar a "gravity" do Pi-hole para aplicar as mudanças:
 
@@ -36,7 +30,7 @@ pihole -g
 ```
 
 
-4. **Adicionar uma Tarefa ao crontab do Root Diretamente com echo**
+3. **Adicionar uma Tarefa ao crontab do Root Diretamente com echo**
 
 Você pode adicionar uma linha ao crontab do root para rodar o comando do Pi-hole diariamente às 3 da manhã. Para isso, execute o seguinte comando:
 
@@ -45,7 +39,7 @@ echo "0 3 * * * /usr/local/bin/pihole -g > /tmp/pihole_update.log 2>&1" | sudo t
 ```
 
 
-7. **Conferir Dominios Bloqueados**
+4. **Conferir Dominios Bloqueados**
 
 Execute o script para verificar os dominios bloqueados:
 
@@ -54,7 +48,7 @@ cat /etc/pihole/gravity.db
 ```
 
 
-12. **Testar Domínios Bloqueados**
+5. **Testar Domínios Bloqueados**
 
 Você poderá testar os domínios bloqueados substituindo `assistirseriesmp4.com` pelo domínio que deseja testar:
 
