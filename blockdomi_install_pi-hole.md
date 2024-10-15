@@ -18,7 +18,8 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
 
 1. **No menu lateral esquerdo Procurar Adlists:**
 
-![image](https://github.com/user-attachments/assets/12bde828-3561-4312-8a3b-8d03219d5087)
+![image](https://github.com/user-attachments/assets/4e887f18-dbde-431a-8204-b601d37347ed)
+
 
 
 2. **Adicione a lista de dominios**
