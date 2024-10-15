@@ -17,6 +17,10 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
 ### Bloqueio de Domínios no Pi-Hole
 
 1. **Adicione a lista de dominios**
+   
+```plaintext
+ https://api.blockdomi.com.br/domain/all
+```
 
 ![image](https://i.imgur.com/qGUjsPU.png)
 
