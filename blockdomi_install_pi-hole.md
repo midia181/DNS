@@ -24,7 +24,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
 
 2. **Adicione a lista de dominios**
 
-![image](https://github.com/user-attachments/assets/4743bf63-ecb9-4df8-add2-277e19a1df88)
+![image](https://i.imgur.com/cmkR46z.png)
 
 
 3. **No terminal atualize a lista**
