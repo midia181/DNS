@@ -56,8 +56,11 @@ Após a inserção do script, certifique-se de que ele está programado para rod
 siga os passos para garantir que o mikrotik irá sicronizar altomaticamente com o blockdomi
 
 1º - Verifique em System > Scripts, veja se o script "BlockDomiImport" estará criado.
+
 2º - Verifique em System > Scheduler, se a rotina "BlockDomiImport" foi criada.
+
 3º - Verifique os dominios bloqueados em IP > DNS > Static
+
 4º - Verifique as regras input que bloqueia invasões a porta 53 em IP > Firewall > Filter Rules irá conter uma regra com nome "Bloqueia Conexões Entrantes na Porta 53"
 
 
