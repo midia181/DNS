@@ -14,7 +14,7 @@
 
 A restrição de domínios no sistema DNS deve ser configurada no servidor DNS recursivo utilizado pelos clientes do provedor de Internet.
 
-### Bloqueio de Domínios no Mikrotik
+### Bloqueio de Domínios no Mikrotik V6
 
 Para o bloqueio funcionar corretamente, o DNS Cache do mikrotik precisa esta habilitado. (Não é uma pratica recomendada)
 Recomendo mudar o quanto antes para Unbound ou Bind9 em servidores Debian/Ubuntu.
