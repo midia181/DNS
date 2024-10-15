@@ -22,7 +22,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
  https://api.blockdomi.com.br/domain/all
 ```
 
-<img src="https://i.imgur.com/qGUjsPU.png" alt="image" class="img-custom">
+![Imagem](https://i.imgur.com/cmkR46z.png)
 
 
 2. **No terminal atualize a lista**
