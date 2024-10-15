@@ -1,18 +1,21 @@
 ## Bloqueios na Internet
 
-> **Confidencial**: Devido à natureza delicada das informações ou ao contexto de sua disseminação, os domínios e sites restritos são tratados como confidenciais. O acesso à API é exclusivo para empresas de telecomunicações devidamente registradas na Anatel.
-> 
-> Confira seu CNPJ aqui: <a href="https://informacoes.anatel.gov.br/paineis/outorga-e-licenciamento" target="_blank">ANATEL Outorga e Licenciamento</a>
-> 
-> Contatos para obter acesso à API:
-> - <a href="https://api.whatsapp.com/send/?phone=5584998667245&text=Como+obter+acesso+a+API%3F&type=phone_number&app_absent=0" target="_blank">WhatsApp</a>
-> - <a href="https://t.me/LucasMidia" target="_blank">Telegram</a>
+> **Confidencial**: Devido à natureza delicada das informações e ao contexto de sua disseminação, os domínios e sites restritos são tratados como confidenciais. O acesso à API é exclusivo para empresas de telecomunicações devidamente registradas na Anatel.
+>
+> **Verifique seu CNPJ aqui**: [ANATEL Outorga e Licenciamento](https://informacoes.anatel.gov.br/paineis/outorga-e-licenciamento)
+>
+> **Contatos para obter acesso à API**:
+> - [WhatsApp](https://api.whatsapp.com/send/?phone=5584998667245&text=Como+obter+acesso+a+API%3F&type=phone_number&app_absent=0)
+> - [Telegram](https://t.me/LucasMidia)
 
+---
 
-# Implementar bloqueios de domínios
-A restrição de domínios no sistema de DNS deve ser configurada no servidor DNS recursivo utilizado pelos clientes do provedor de Internet.
+# Implementação de Bloqueios de Domínios
 
-# Configurando DNS Cache no Mikrotik
+A restrição de domínios no sistema DNS deve ser configurada no servidor DNS recursivo utilizado pelos clientes do provedor de Internet.
+
+### Bloqueio de Domínios no Mikrotik
+
 Para o bloqueio funcionar corretamente, o DNS Cache do mikrotik precisa esta habilitado. (Não é uma pratica recomendada)
 Recomendo mudar o quanto antes para Unbound ou Bind9 em servidores Debian/Ubuntu.
 
@@ -46,7 +49,7 @@ Para integrar o Mikrotik ao BlockDomi com acesso via SSH ou Winbox (Terminal), E
 /log warning \"Importacao de dominios bloqueados concluida\"; \
 /file remove blocked_domains.rsc;"
 ```
-Após colocado o script, garanta que ele roda altomaticamente via scherduler
+Após a inserção do script, certifique-se de que ele está programado para rodar automaticamente todos os dias às 1h da madrugada. Para garantir a execução correta, verifique se o horário do seu Mikrotik está devidamente sincronizado.
 ```plaintext
 /system scheduler add name="DailyBlockDomiImport" start-time=01:00:00 interval=1d on-event="BlockDomiImport"
 ```
