@@ -63,9 +63,11 @@ siga os passos para garantir que o mikrotik irá sicronizar altomaticamente com 
 
 4º - Verifique as regras input que bloqueia invasões a porta 53 em IP > Firewall > Filter Rules irá conter uma regra com nome "Bloqueia Conexões Entrantes na Porta 53"
 
-Formato da lista baixada
+Formato da lista baixada:
 
+<pre>
 /ip dns static add name="assistirseriesmp4.com" address=127.0.0.1 comment="Blocked by Blockdomi"
 /ip dns static add name="assistirserieson.biz" address=127.0.0.1 comment="Blocked by Blockdomi"
+</pre>
 
 Validando as configurações acima tudo irá acontecer como esperado.
