@@ -29,7 +29,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    ```
 
 ## Bloqueio de domínios no Unbound
-2. **Criar Diretório e Baixar Script**
+1. **Criar Diretório e Baixar Script**
 
    Crie um diretório onde o script do BLOCKDOMI será armazenado e baixe o script:
 
@@ -40,7 +40,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    ```
 
    
-3. **Permissões de Execução para o Script**
+2. **Permissões de Execução para o Script**
 
    Dê permissão de execução ao script:
 
@@ -49,7 +49,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    ```
 
 
-4. **Adicione o arquivo de configuração do blockdomi no parametro server: do arquivo /etc/unbound/unbound.conf**
+3. **Adicione o arquivo de configuração do blockdomi no parametro server: do arquivo /etc/unbound/unbound.conf**
    
     ```plaintext
     nano /etc/unbound/unbound.conf
@@ -78,7 +78,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    </pre>
 
 
-5. **Executar o Script**
+4. **Executar o Script**
 
    Execute o script para sincronizar com a API do BLOCKDOMI:
    
@@ -88,7 +88,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
 
    > Caso utilize um domínio para a página de bloqueio, substitua `127.0.0.1` pelo seu domínio.
 
-6. **Verificar Mensagens do Script**
+5. **Verificar Mensagens do Script**
 
    Ao rodar o script pela primeira vez, se tudo ocorrer bem, a mensagem exibida será:
 
@@ -123,7 +123,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    ```
 
 
-7. **Executar o Script Novamente**
+6. **Executar o Script Novamente**
 
    Se o script for executado novamente com a mesma versão, a mensagem exibida será:
 
@@ -133,7 +133,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    </pre>
 
 
-8. **Automatizar a Execução do Script**
+7. **Automatizar a Execução do Script**
 
    Para manter a lista sempre atualizada, configure o script para ser executado diariamente à meia-noite:
 
@@ -149,7 +149,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    systemctl restart cron
    ```
 
-9. **Domínios Bloqueados**
+8. **Domínios Bloqueados**
 
 
    No arquivo /etc/unbound/blockdomi/blockdomi.conf segue o exemplo de como irá ficar os dominios bloqueados
@@ -167,7 +167,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    </pre>
 
 
-10. **Verificar Domínios Bloqueados**
+9. **Verificar Domínios Bloqueados**
 
     Para verificar os domínios bloqueados:
 
@@ -176,7 +176,7 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    ```
 
 
-11. **Testar Domínios Bloqueados**
+10. **Testar Domínios Bloqueados**
 
     Após rodar o script, você poderá testar os domínios bloqueados substituindo `assistirseriesmp4.com` pelo domínio que deseja testar:
 
