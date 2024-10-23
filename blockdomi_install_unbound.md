@@ -14,8 +14,21 @@
 
 A restrição de domínios no sistema DNS deve ser configurada no servidor DNS recursivo utilizado pelos clientes do provedor de Internet.
 
+1. Instale as dependencias para rodar o script bash
+   **No Debian 12, é necessário instalar o pacote `unbound-anchor` (caso ainda não esteja instalado), pois ele não vem incluído por padrão**
+   
+   ```plaintext
+   apt install unbound-anchor
+   ```
+   
+   **No Debian 11, é necessário instalar o pacote `curl` (caso ainda não esteja instalado), pois ele não vem incluído por padrão**
+   
+   ```plaintext
+   apt install curl
+   ```
+
 ## Bloqueio de domínios no Unbound
-1. **Criar Diretório e Baixar Script**
+2. **Criar Diretório e Baixar Script**
 
    Crie um diretório onde o script do BLOCKDOMI será armazenado e baixe o script:
 
@@ -26,19 +39,12 @@ A restrição de domínios no sistema DNS deve ser configurada no servidor DNS r
    ```
 
    
-2. **Permissões de Execução para o Script**
+3. **Permissões de Execução para o Script**
 
    Dê permissão de execução ao script:
 
    ```plaintext
    chmod +x /etc/unbound/scripts/blockdomi-unbound.sh
-   ```
-
-
-3. **No Debian 12, é necessário instalar o pacote `unbound-anchor` (caso ainda não esteja instalado), pois ele não vem incluído por padrão**
-   
-   ```plaintext
-   apt install unbound-anchor
    ```
 
 
