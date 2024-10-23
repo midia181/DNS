@@ -15,6 +15,7 @@
 A restrição de domínios no sistema DNS deve ser configurada no servidor DNS recursivo utilizado pelos clientes do provedor de Internet.
 
 1. Instale as dependencias para rodar o script bash
+   
    **No Debian 12, é necessário instalar o pacote `unbound-anchor` (caso ainda não esteja instalado), pois ele não vem incluído por padrão**
    
    ```plaintext
