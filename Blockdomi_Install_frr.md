@@ -27,55 +27,55 @@ apt install curl apt-transport-https gnupg2 lsb-release tree net-tools
 
 1. **Instalação do Free Range Routing**
 
-  Pacotes presente do FRR no repositório do Debian 10 estão na versão 6.x.x, e Debian 11 na 7.5.x vou ir além e usar o repositório mais
-  atualizado do FRR disponíveis em https://deb.frrouting.org, mas fica a seu critério se desejar usar o repositório “default”.
+Pacotes presente do FRR no repositório do Debian 10 estão na versão 6.x.x, e Debian 11 na 7.5.x vou ir além e usar o repositório mais
+atualizado do FRR disponíveis em https://deb.frrouting.org, mas fica a seu critério se desejar usar o repositório “default”.
   
-  Para usar pacotes do repositório FRR faça:
+Para usar pacotes do repositório FRR faça:
   
-  ```plaintext
-  curl -s https://deb.frrouting.org/frr/keys.asc | apt-key add -
-  ```
+```plaintext
+curl -s https://deb.frrouting.org/frr/keys.asc | apt-key add -
+```
 
 2. **Instale o frr mas fique a seu critério/necessidade para instalar mais pacotes.**
 
-   ```plaintext
-   apt install frr
-   ```
+```plaintext
+apt install frr
+```
    
 3. **Após instalação o diretorio /etc/ffr/ será criado juntamente com seus arquivos de configuração. Arquitetura do diretório:**
 
-   ```plaintext
-   tree /etc/frr/
-   ```
+```plaintext
+tree /etc/frr/
+```
 
-  <pre>
+<pre>
    /etc/frr/
    ├── daemons
    ├── frr.conf
    ├── support_bundle_commands.conf
    └── vtysh.conf
-  </pre>
+</pre>
 
 
 4. **Como de costume vamos fazer um backup dos arquivos originais caso cometermos alguma “cagada” **
 
 
-   ```plaintext
-    mkdir /etc/frr/backups
-    cp /etc/frr/daemons /etc/frr/backups/
-    cp /etc/frr/frr.conf /etc/frr/backups/
-    cp /etc/frr/vtysh.conf /etc/frr/backups/
-    cp /etc/frr/support_bundle_commands.conf /etc/frr/backups/
-   ```
+```plaintext
+mkdir /etc/frr/backups
+cp /etc/frr/daemons /etc/frr/backups/
+cp /etc/frr/frr.conf /etc/frr/backups/
+cp /etc/frr/vtysh.conf /etc/frr/backups/
+cp /etc/frr/support_bundle_commands.conf /etc/frr/backups/
+```
 
 5. **Ative o daemon BGP**
 
-   Para ativar o daemon BGP, edite o arquivo /etc/frr/daemons e habilite o daemon desejado configurando com "yes", da seguinte forma:
+Para ativar o daemon BGP, edite o arquivo /etc/frr/daemons e habilite o daemon desejado configurando com "yes", da seguinte forma:
 
-   ```plaintext
-   nano /etc/frr/daemons
-   ```
-  <pre>
+```plaintext
+nano /etc/frr/daemons
+```
+<pre>
    # Para habilitar um daemon específico, simplesmente altere o 'no' correspondente para 'yes', e será necessário reiniciar o serviço.
    bgpd=yes 	# BGP
    ospfd=no 	# OSPFD (OSPFv2 - IPv4)
@@ -116,21 +116,21 @@ apt install curl apt-transport-https gnupg2 lsb-release tree net-tools
    bfdd_options="   -A 127.0.0.1"
    fabricd_options="-A 127.0.0.1"
    vrrpd_options="  -A 127.0.0.1"
-  </pre>
+</pre>
  
 
 6. **Alterações feitas no /etc/frr/daemons vamos reiniciar o FRR**
 
-   ```plaintext
-   systemctl restart frr
-   ```
+```plaintext
+systemctl restart frr
+```
    
-   Verifique se o mesmo está ok
+Verifique se o mesmo está ok
 
-   ```plaintext
-   systemctl status frr
-   ```
-  <pre>
+```plaintext
+systemctl status frr
+```
+<pre>
      ● frr.service - FRRouting
       Loaded: loaded (/lib/systemd/system/frr.service; enabled; vendor preset: enabled)
       Active: active (running) since Tue 2020-08-11 14:00:29 -03; 41s ago
@@ -157,21 +157,21 @@ apt install curl apt-transport-https gnupg2 lsb-release tree net-tools
    set 23 15:44:11 accel watchfrr[1220]: all daemons up, doing startup-complete notify
    ago 11 14:00:29 frr frrinit.sh[665]: Started watchfrr.
    ago 11 14:00:29 frr systemd[1]: Started FRRouting.
-  </pre>
+</pre>
 
 
 7. **Entrado no Shell VTY e configurando BGP**
 
-   Vtysh fornece um frontend combinado para todos os daemons FRR em uma única sessão combinada.:
+Vtysh fornece um frontend combinado para todos os daemons FRR em uma única sessão combinada.:
 
-   ```plaintext
-   vtysh
-   ```
+```plaintext
+vtysh
+```
    
-   Aqui iremos bloquear rotas entrantes no ibgp frr e exportar somente a lista de ips nescessarias para o bloqueio,
-   Exemplo de configuração basica, Ajuste de acordo com oque precisa:
-   
-   ```plaintext
+Aqui iremos bloquear rotas entrantes no ibgp frr e exportar somente a lista de ips nescessarias para o bloqueio,
+Exemplo de configuração basica, Ajuste de acordo com oque precisa:
+
+```plaintext
    configure terminal
     !
     router bgp 65530
@@ -199,68 +199,33 @@ apt install curl apt-transport-https gnupg2 lsb-release tree net-tools
     !
     end
     write
-   ```
+```
 
 
-9. **Criar a pasta onde ficará o script para altomatizar os bloqueios dos ips**
+9. **Criar a pasta e baixar o script para altomatizar os bloqueios dos ips**
 
 
-    ```plaintext
-    mkdir /etc/frr/block
-    mkdir /etc/frr/block/script
-    cd /etc/frr/block/script
-    wget 
-    ```
+```plaintext
+mkdir /etc/frr/block
+mkdir /etc/frr/block/script
+cd /etc/frr/block/script
+curl -O https://raw.githubusercontent.com/midia181/client_blockdomi/refs/heads/main/sync-frr-block.sh
+```
 
 
-11. **Testar Domínios Bloqueados**
+11. **Testar o script**
 
-    Após rodar o script, você poderá testar os domínios bloqueados substituindo `assistirseriesmp4.com` pelo domínio que deseja testar:
+Substitua o `<AS>` pelo numero de AS configurado no IBGP:
 
-    ```plaintext
-    dig assistirseriesmp4.com @localhost
-    ```
-
-
-    Caso não tenha os pacotes `dnsutils` instalados para testar com o `dig`:
-
-    ```plaintext
-    apt install dnsutils
-    ```
+```plaintext
+bash /etc/frr/block/script/sync-frr-block.sh <AS>
+```
 
 
-    Exemplo de saída do comando `dig`:
+12. **Você pode adicionar o script ao cron usando o comando echo para criar uma nova entrada. Abaixo está o exemplo de como adicionar o script sync-frr-block.sh ao cron para ser executado diariamente:
 
-    <pre>
-      ; <<>> DiG 9.16.50-Debian <<>> assistirseriesmp4.com @localhost
-      ;; global options: +cmd
-      ;; Got answer:
-      ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 23555
-      ;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 2
-      
-      ;; OPT PSEUDOSECTION:
-      ; EDNS: version: 0, flags:; udp: 1232
-      ; COOKIE: bb21e28a5d506ebe01000000670ac85874808e2b1b5e2c57 (good)
-      ;; QUESTION SECTION:
-      ;assistirseriesmp4.com.         IN      A
-      
-      ;; ANSWER SECTION:
-      assistirseriesmp4.com.  5       IN      CNAME   localhost.
-      localhost.              604800  IN      A       127.0.0.1
-      
-      ;; ADDITIONAL SECTION:
-      blockdomi.zone.         1       IN      SOA     LOCALHOST. localhost. 2024101201 3600 900 2592000 7200
-      
-      ;; Query time: 552 msec
-      ;; SERVER: ::1#53(::1)
-      ;; WHEN: Sat Oct 12 16:04:56 -03 2024
-      ;; MSG SIZE  rcvd: 176
-    </pre>
+```plaintext
+echo "0 0 * * * /bin/bash /etc/frr/block/script/sync-frr-block.sh" >> /etc/crontab
+```
 
-    
-    Observe que o domínio `assistirseriesmp4.com` está sendo redirecionado para o `localhost`:
-    
-    <pre>
-      assistirseriesmp4.com.  5       IN      CNAME   localhost.
-      localhost.              604800  IN      A       127.0.0.1
-    </pre>
+13. 
