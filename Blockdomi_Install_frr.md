@@ -202,7 +202,7 @@ bash /etc/frr/block/script/sync-frr-block.sh <AS>
 ```
 
 
-**Você pode adicionar o script ao cron usando o comando echo para criar uma nova entrada. Abaixo está o exemplo de como adicionar o script sync-frr-block.sh ao cron para ser executado diariamente:
+**Você pode adicionar o script ao cron usando o comando echo para criar uma nova entrada. Abaixo está o exemplo de como adicionar o script sync-frr-block.sh ao cron para ser executado diariamente:**
 
 ```plaintext
 echo "0 0 * * * /bin/bash /etc/frr/block/script/sync-frr-block.sh" >> /etc/crontab
