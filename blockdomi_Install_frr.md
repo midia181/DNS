@@ -217,8 +217,11 @@ Isso irá garantir que o script seja executado automaticamente todos os dias à 
 
 As listas de IPs bloqueados, tanto para IPv4 quanto para IPv6, estão localizadas nos seguintes arquivos dentro do diretório /etc/frr/block/:
 
+<pre>
 ipv4_list.txt: Contém os IPs bloqueados para IPv4.
 ipv6_list.txt: Contém os IPs bloqueados para IPv6.
 version.txt: Contém a versão atual da lista de bloqueios.
+</pre>
+
 
 Esses arquivos são atualizados conforme necessário para refletir as alterações no bloqueio de IPs.
