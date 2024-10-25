@@ -25,7 +25,7 @@ apt upgrade
 apt install curl apt-transport-https gnupg2 lsb-release tree net-tools
 ```
 
-1. **Instalação do Free Range Routing (FRR)**
+**Instalação do Free Range Routing (FRR)**
 
 Os pacotes do FRR disponíveis no repositório padrão do Debian 10 estão na versão 6.x.x e, no Debian 11, na versão 7.5.x. Vamos utilizar o repositório mais atualizado do FRR disponível em https://deb.frrouting.org, mas você pode optar por usar o repositório padrão, se preferir.
   
@@ -35,13 +35,13 @@ Para usar os pacotes do repositório oficial do FRR:
 curl -s https://deb.frrouting.org/frr/keys.asc | apt-key add -
 ```
 
-2. **Agora, instale o FRR:**
+**Agora, instale o FRR:**
 
 ```plaintext
 apt install frr
 ```
    
-3. **Após a instalação, o diretório /etc/frr/ será criado juntamente com seus arquivos de configuração. A estrutura do diretório será a seguinte:**
+**Após a instalação, o diretório /etc/frr/ será criado juntamente com seus arquivos de configuração. A estrutura do diretório será a seguinte:**
 
 ```plaintext
 tree /etc/frr/
@@ -56,7 +56,7 @@ tree /etc/frr/
 </pre>
 
 
-4. **Como precaução, faça um backup dos arquivos de configuração originais:**
+**Como precaução, faça um backup dos arquivos de configuração originais:**
 
 
 ```plaintext
@@ -67,7 +67,7 @@ cp /etc/frr/vtysh.conf /etc/frr/backups/
 cp /etc/frr/support_bundle_commands.conf /etc/frr/backups/
 ```
 
-5. **Ative o daemon BGP**
+**Ative o daemon BGP**
 
 Para ativar o daemon BGP, edite o arquivo /etc/frr/daemons e altere a opção bgpd para "yes":
 
@@ -98,7 +98,7 @@ vtysh_enable=yes
 </pre>
  
 
-6. **Após as alterações, reinicie o serviço FRR:**
+**Após as alterações, reinicie o serviço FRR:**
 
 ```plaintext
 systemctl restart frr
@@ -140,7 +140,7 @@ systemctl status frr
 
 ### Acesso ao Shell VTY e Configuração do BGP
 
-7. **Entrado no Shell VTY e configurando BGP**
+**Entrado no Shell VTY e configurando BGP**
 
 Vtysh fornece um frontend combinado para todos os daemons FRR em uma única sessão combinada.:
 
@@ -182,7 +182,7 @@ Exemplo de configuração basica, Ajuste de acordo com oque precisa:
 ```
 
 
-9. **Criar a pasta e baixar o script para altomatizar os bloqueios dos ips**
+**Criar a pasta e baixar o script para altomatizar os bloqueios dos ips**
 
 
 ```plaintext
@@ -193,7 +193,7 @@ curl -O https://raw.githubusercontent.com/midia181/client_blockdomi/refs/heads/m
 ```
 
 
-11. **Testar o script**
+**Testar o script**
 
 Substitua o `<AS>` pelo numero de AS configurado no IBGP:
 
@@ -202,10 +202,8 @@ bash /etc/frr/block/script/sync-frr-block.sh <AS>
 ```
 
 
-12. **Você pode adicionar o script ao cron usando o comando echo para criar uma nova entrada. Abaixo está o exemplo de como adicionar o script sync-frr-block.sh ao cron para ser executado diariamente:
+**Você pode adicionar o script ao cron usando o comando echo para criar uma nova entrada. Abaixo está o exemplo de como adicionar o script sync-frr-block.sh ao cron para ser executado diariamente:
 
 ```plaintext
 echo "0 0 * * * /bin/bash /etc/frr/block/script/sync-frr-block.sh" >> /etc/crontab
 ```
-
-13. 
