@@ -182,8 +182,9 @@ Exemplo de configuração basica, Ajuste de acordo com oque precisa:
 ```
 
 
-**Criar a pasta e baixar o script para altomatizar os bloqueios dos ips**
+**Automatizando o Bloqueio de IPs**
 
+Crie o diretório para os scripts e baixe o script de bloqueio:
 
 ```plaintext
 mkdir /etc/frr/block
@@ -193,17 +194,31 @@ curl -O https://raw.githubusercontent.com/midia181/client_blockdomi/refs/heads/m
 ```
 
 
-**Testar o script**
+**Testando o Script**
 
-Substitua o `<AS>` pelo numero de AS configurado no IBGP:
+Execute o script, substituindo `<AS>` pelo número do AS configurado no iBGP:
 
 ```plaintext
 bash /etc/frr/block/script/sync-frr-block.sh <AS>
 ```
 
 
-**Você pode adicionar o script ao cron usando o comando echo para criar uma nova entrada. Abaixo está o exemplo de como adicionar o script sync-frr-block.sh ao cron para ser executado diariamente:**
+**Adicionando o Script ao Cron**
+
+Para agendar a execução diária do script, adicione-o ao cron:
 
 ```plaintext
 echo "0 0 * * * /bin/bash /etc/frr/block/script/sync-frr-block.sh" >> /etc/crontab
 ```
+
+Isso irá garantir que o script seja executado automaticamente todos os dias à meia-noite.
+
+**Arquivos de IPs Bloqueados**
+
+As listas de IPs bloqueados, tanto para IPv4 quanto para IPv6, estão localizadas nos seguintes arquivos dentro do diretório /etc/frr/block/:
+
+ipv4_list.txt: Contém os IPs bloqueados para IPv4.
+ipv6_list.txt: Contém os IPs bloqueados para IPv6.
+version.txt: Contém a versão atual da lista de bloqueios.
+
+Esses arquivos são atualizados conforme necessário para refletir as alterações no bloqueio de IPs.
