@@ -140,8 +140,6 @@ systemctl status frr
 
 ### Acesso ao Shell VTY e Configuração do BGP
 
-**Entrado no Shell VTY e configurando BGP**
-
 Vtysh fornece um frontend combinado para todos os daemons FRR em uma única sessão combinada.:
 
 ```plaintext
