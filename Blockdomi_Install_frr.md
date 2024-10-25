@@ -160,64 +160,56 @@ apt install curl apt-transport-https gnupg2 lsb-release tree net-tools
   </pre>
 
 
-7. **Entrado no Shell VTY**
+7. **Entrado no Shell VTY e configurando BGP**
 
    Vtysh fornece um frontend combinado para todos os daemons FRR em uma única sessão combinada.:
 
    ```plaintext
    vtysh
    ```
-
-
-8. **Automatizar a Execução do Script**
-
-   Para manter a lista sempre atualizada, configure o script para ser executado diariamente à meia-noite:
-
+   
+   Aqui iremos bloquear rotas entrantes no ibgp frr e exportar somente a lista de ips nescessarias para o bloqueio,
+   Exemplo de configuração basica, Ajuste de acordo com oque precisa:
+   
    ```plaintext
-   echo '00 00   * * *   root    /etc/bind/scripts/blockdomi-bind9.sh localhost' >> /etc/crontab
+   configure terminal
+    !
+    router bgp 65530
+     neighbor <ipv4-remoto> remote-as <as-remoto>
+     neighbor <ipv4-remoto> description "iBGP_BLOCKDOMI_IPv4"
+     neighbor <ipv6-remoto> remote-as <as-remoto>
+     neighbor <ipv6-remoto> description "iBGP_BLOCKDOMI_IPv6"
+     !
+     address-family ipv4 unicast
+      neighbor <ipv4-remoto> prefix-list FILTRO-BLOCKDOMI-IPV4-IN in
+      neighbor <ipv4-remoto> prefix-list FILTRO-BLOCKDOMI-IPV4-OUT out
+     exit-address-family
+     !
+     address-family ipv6 unicast
+      neighbor <ipv6-remoto> activate
+      neighbor <ipv6-remoto> prefix-list FILTRO-BLOCKDOMI-IPV6-IN in
+      neighbor <ipv6-remoto> prefix-list FILTRO-BLOCKDOMI-IPV6-OUT out
+     exit-address-family
+    !
+    ip prefix-list FILTRO-BLOCKDOMI-IPV4-IN seq 5 deny any
+    !
+    ipv6 prefix-list FILTRO-BLOCKDOMI-IPV6-IN seq 5 deny any
+    !
+    line vty
+    !
+    end
+    write
    ```
 
-   > Caso utilize um domínio para a página de bloqueio, substitua `localhost` pelo seu domínio.
 
-   Reinicie o cron:
+9. **Criar a pasta onde ficará o script para altomatizar os bloqueios dos ips**
 
-   ```plaintext
-   systemctl restart cron
-   ```
-9. **Domínios Bloqueados**
-
-   No arquivo `/etc/bind/blockdomi/db.rpz.zone.hosts` segue o exemplo de como irá ficar os dominios bloqueados:
-
-   <pre>
-   $TTL 1H
-   @       IN      SOA LOCALHOST. localhost. (
-                   2024101201      ; Serial
-                   1h              ; Refresh
-                   15m             ; Retry
-                   30d             ; Expire
-                   2h              ; Negative Cache TTL
-           )
-           NS  localhost.
-
-   assistirseriesmp4.com IN CNAME localhost.
-   *.assistirseriesmp4.com IN CNAME localhost.
-   </pre>
-
-
-   Para cada domínio bloqueado, irá conter:
-
-   <pre>
-   assistirseriesmp4.com IN CNAME localhost.
-   *.assistirseriesmp4.com IN CNAME localhost.
-   </pre>
-      
-
-10. **Verificar Domínios Bloqueados**
-
-    Para verificar os domínios bloqueados:
 
     ```plaintext
-    cat /etc/bind/blockdomi/domain_all
+    mkdir /etc/frr/block
+    mkdir /etc/frr/block/script
+    cd /etc/frr/block/script
+    wget 
     ```
 
 
