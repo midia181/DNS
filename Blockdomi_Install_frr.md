@@ -16,7 +16,7 @@ A restrição de IPs pode ser implementada no roteador de borda ou no servidor B
 
 ### Bloqueio de Ips no BGP FRR
 
-Antes de começar não esqueça de virar root da forma correta e atualizar os pacotes, e instalar alguns pacotes que serão necessários.
+Antes de começar, certifique-se de trocar para o usuário root corretamente, atualizar os pacotes e instalar as dependências necessárias:
 
 ```plaintext
 su -
@@ -25,24 +25,23 @@ apt upgrade
 apt install curl apt-transport-https gnupg2 lsb-release tree net-tools
 ```
 
-1. **Instalação do Free Range Routing**
+1. **Instalação do Free Range Routing (FRR)**
 
-Pacotes presente do FRR no repositório do Debian 10 estão na versão 6.x.x, e Debian 11 na 7.5.x vou ir além e usar o repositório mais
-atualizado do FRR disponíveis em https://deb.frrouting.org, mas fica a seu critério se desejar usar o repositório “default”.
+Os pacotes do FRR disponíveis no repositório padrão do Debian 10 estão na versão 6.x.x e, no Debian 11, na versão 7.5.x. Vamos utilizar o repositório mais atualizado do FRR disponível em https://deb.frrouting.org, mas você pode optar por usar o repositório padrão, se preferir.
   
-Para usar pacotes do repositório FRR faça:
+Para usar os pacotes do repositório oficial do FRR:
   
 ```plaintext
 curl -s https://deb.frrouting.org/frr/keys.asc | apt-key add -
 ```
 
-2. **Instale o frr mas fique a seu critério/necessidade para instalar mais pacotes.**
+2. **Agora, instale o FRR:**
 
 ```plaintext
 apt install frr
 ```
    
-3. **Após instalação o diretorio /etc/ffr/ será criado juntamente com seus arquivos de configuração. Arquitetura do diretório:**
+3. **Após a instalação, o diretório /etc/frr/ será criado juntamente com seus arquivos de configuração. A estrutura do diretório será a seguinte:**
 
 ```plaintext
 tree /etc/frr/
@@ -57,7 +56,7 @@ tree /etc/frr/
 </pre>
 
 
-4. **Como de costume vamos fazer um backup dos arquivos originais caso cometermos alguma “cagada” **
+4. **Como precaução, faça um backup dos arquivos de configuração originais:**
 
 
 ```plaintext
@@ -70,62 +69,42 @@ cp /etc/frr/support_bundle_commands.conf /etc/frr/backups/
 
 5. **Ative o daemon BGP**
 
-Para ativar o daemon BGP, edite o arquivo /etc/frr/daemons e habilite o daemon desejado configurando com "yes", da seguinte forma:
+Para ativar o daemon BGP, edite o arquivo /etc/frr/daemons e altere a opção bgpd para "yes":
 
 ```plaintext
 nano /etc/frr/daemons
 ```
+
+Habilite o daemon BGP configurando as opções da seguinte maneira:
+
 <pre>
-   # Para habilitar um daemon específico, simplesmente altere o 'no' correspondente para 'yes', e será necessário reiniciar o serviço.
-   bgpd=yes 	# BGP
-   ospfd=no 	# OSPFD (OSPFv2 - IPv4)
-   ospf6d=no 	# OSPF6D (OSPFv3 - IPv6)
-   ripd=no 	# RIPD (RIPv2 - IPv4)
-   ripngd=no 	# RIPNGD (RIPv3 - IPv6)
-   isisd=no 	# ISISD (IS-IS - Protocolo igp Cisco)
-   pimd=no 	# PIMD (PIM - Roteamento Multicast)
-   ldpd=no 	# LDPD (LDP - Labels MPLS para rotas igp)
-   nhrpd=no 	# NHRPD (NHRP - roteamento entre tuneis)
-   eigrpd=no 	# EIGRPD (EIGRP - protocolo igp Cisco)
-   babeld=no 	# BABELD (BABEL - protocolo igp dual-stack)
-   sharpd=no 	# SHARPD (SHARP - protocolo exemplo zclient)
-   pbrd=no 	# PBRD (PBR - gestao de regras para Police Based Routing)
-   bfdd=no 	# BFDD (BFD - protocolo de adjacencia instantanea)
-   fabricd=no 	# FABRICD (OpenFabric)
-   vrrpd=no 	# VRRPD (Virtual Router Redundancy Protocol Deamon)
-   
-   # Como o nome diz, isso faz com que o VTYSH aplique a configuração ao iniciar aos daemons. 
-   vtysh_enable=yes 
-   
-   # O próximo conjunto de linhas controla quais opções são passadas aos daemons quando iniciados. 
-   zebra_options="  -A 127.0.0.1 -s 90000000"
-   bgpd_options="   -A 127.0.0.1"
-   ospfd_options="  -A 127.0.0.1"
-   ospf6d_options=" -A ::1"
-   ripd_options="   -A 127.0.0.1"
-   ripngd_options=" -A ::1"
-   isisd_options="  -A 127.0.0.1"
-   pimd_options="   -A 127.0.0.1"
-   ldpd_options="   -A 127.0.0.1"
-   nhrpd_options="  -A 127.0.0.1"
-   eigrpd_options=" -A 127.0.0.1"
-   babeld_options=" -A 127.0.0.1"
-   sharpd_options=" -A 127.0.0.1"
-   pbrd_options="   -A 127.0.0.1"
-   staticd_options="-A 127.0.0.1"
-   bfdd_options="   -A 127.0.0.1"
-   fabricd_options="-A 127.0.0.1"
-   vrrpd_options="  -A 127.0.0.1"
+bgpd=yes 	# BGP
+ospfd=no 	# OSPFD (OSPFv2 - IPv4)
+ospf6d=no 	# OSPF6D (OSPFv3 - IPv6)
+ripd=no 	# RIPD (RIPv2 - IPv4)
+ripngd=no 	# RIPNGD (RIPv3 - IPv6)
+isisd=no 	# ISISD (IS-IS - Protocolo IGP da Cisco)
+pimd=no 	# PIMD (Roteamento Multicast)
+ldpd=no 	# LDPD (MPLS para rotas IGP)
+nhrpd=no 	# NHRPD (Roteamento entre túneis)
+eigrpd=no 	# EIGRPD (Protocolo IGP da Cisco)
+babeld=no 	# BABELD (Protocolo IGP Dual-Stack)
+sharpd=no 	# SHARPD (Protocolo exemplo zclient)
+pbrd=no 	# PBRD (Gestão de Regras de PBR)
+bfdd=no 	# BFDD (Protocolo de Adjacência Instantânea)
+fabricd=no 	# FABRICD (OpenFabric)
+vrrpd=no 	# VRRPD (Protocolo de Redundância Virtual)
+vtysh_enable=yes
 </pre>
  
 
-6. **Alterações feitas no /etc/frr/daemons vamos reiniciar o FRR**
+6. **Após as alterações, reinicie o serviço FRR:**
 
 ```plaintext
 systemctl restart frr
 ```
    
-Verifique se o mesmo está ok
+Verifique se o serviço está ativo e rodando corretamente:
 
 ```plaintext
 systemctl status frr
@@ -159,6 +138,7 @@ systemctl status frr
    ago 11 14:00:29 frr systemd[1]: Started FRRouting.
 </pre>
 
+### Acesso ao Shell VTY e Configuração do BGP
 
 7. **Entrado no Shell VTY e configurando BGP**
 
